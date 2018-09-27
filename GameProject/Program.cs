@@ -13,19 +13,11 @@ namespace GameProject
     {
         static void Main(string[] args)
         {
-            RenderWindow Window = new RenderWindow(new VideoMode(1800, 800), "Game Tests!!");
+            MyWindow window = new MyWindow(new VideoMode(1800, 800), "GAME");
 
 
 
-            while(Window.IsOpen)
-            {
-                Window.Clear();
-                Window.DispatchEvents();
-
-
-
-                Window.Display();
-            }
+ 
 
 
 
