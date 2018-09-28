@@ -12,14 +12,29 @@ namespace GameProject
 {
     class MyWindow : RenderWindow
     {
-        /// <summary>
-        /// Main needed constructor
-        /// </summary>
+        public static Font MyFont;
+
+
+         
+        public delegate void CheckingEvents(MyWindow window);//This is handler for one function which check if button was pressed etc.
+        public delegate void RenderingElements(MyWindow window);// This is handler for rendering game scene, each Window have its own elements
+        public CheckingEvents CheckSomeEents;
+        public RenderingElements RenderSomeElements;
+
 
         public MyWindow(VideoMode mode,string title): base(mode,title)
         {
-            //public RenderWindow(VideoMode mode, string title);
+            MyFont = new Font("./Res/Font.ttf");
 
+
+            this.Closed += Onclose;
+            
+        }
+
+        private void Onclose(object sender, EventArgs e)//need to add warning and save window
+        {
+            MyWindow window = (MyWindow)sender;
+            window.Close();
         }
 
 

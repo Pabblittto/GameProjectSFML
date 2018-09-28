@@ -13,15 +13,24 @@ namespace GameProject
     {
         static void Main(string[] args)
         {
+
             MyWindow window = new MyWindow(new VideoMode(1800, 800), "GAME");
+            Menu MenuObj = new Menu(window);
+
+            window.CheckSomeEents = MenuObj.CheckEvents;
+            window.RenderSomeElements = MenuObj.Render;
+
+            while (window.IsOpen)
+            {
+                window.Clear();
+                window.DispatchEvents();
+
+                window.CheckSomeEents.Invoke(window);
+                window.RenderSomeElements.Invoke(window);
 
 
-
- 
-
-
-
-
-        }
+                window.Display();
+            }
+        }// Main
     }
 }
