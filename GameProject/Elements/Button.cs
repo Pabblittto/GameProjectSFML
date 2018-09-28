@@ -7,12 +7,14 @@ using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
 using SFML.Audio;
+using System.Threading;
 
 
 namespace GameProject.Elements
 {
     class Button
     {
+        Frame DestinationSet;
         Boolean focus = false;// bool for protecting PCU against usless color setting in WhenHover
         MyWindow WindowPoint;
         Text Content;
@@ -20,12 +22,14 @@ namespace GameProject.Elements
         RectangleShape Shape;
         public delegate void FunctionEventHandler();
 
-        public Button(Vector2f Size, Vector2f position ,Color color, Color OnHover, string display, Font UsedFont,MyWindow window)
+        public Button(Vector2f Size, Vector2f position ,Color color, Color OnHover, string display, Font UsedFont,MyWindow window, Frame Destination)
         {
             NormalColor = color;
             OnHoverColor = OnHover;
 
             WindowPoint = window;
+
+            DestinationSet = Destination;
 
             Shape = new RectangleShape(Size);
             Shape.Position = position;
@@ -47,7 +51,7 @@ namespace GameProject.Elements
                     Shape.FillColor = OnHoverColor;
                     Shape.OutlineColor = new Color(232, 0, 23);
                     focus = true;
-
+                    // add here sound of click
                 }
             }
             else
@@ -67,11 +71,24 @@ namespace GameProject.Elements
             window.Draw(Content);
         }
 
+        private void OnClick(Frame NextSet,MyWindow window)
+        {
+
+                if (Functions.CheckIfMouseHover(Shape.Size, Shape.Position, WindowPoint) && Mouse.IsButtonPressed(Mouse.Button.Left))
+                {
+                    window.RenderSomeElements = NextSet.Render;
+                    window.CheckSomeEents = NextSet.CheckEvents;
+                    
+                }
+            
+        }
 
 
-        public void Functionality()// all Possible events
+
+        public void Functionality()// all Possible eventsw with this button
         {
             this.WhenHover();
+            this.OnClick(DestinationSet, WindowPoint);
             // function when click
         }
 

@@ -56,9 +56,11 @@
   <ItemGroup>
     <Compile Include="Elements\Button.cs" />
     <Compile Include="Elements\Functions.cs" />
+    <Compile Include="Exit.cs" />
     <Compile Include="Frame.cs" />
     <Compile Include="menu.cs" />
     <Compile Include="MyWindow.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

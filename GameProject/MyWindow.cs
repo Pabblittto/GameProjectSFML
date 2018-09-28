@@ -13,6 +13,7 @@ namespace GameProject
     class MyWindow : RenderWindow
     {
         public static Font MyFont;
+        public static MyWindow window;// I invent it too late :/- less coding 
 
 
          
@@ -25,7 +26,7 @@ namespace GameProject
         public MyWindow(VideoMode mode,string title): base(mode,title)
         {
             MyFont = new Font("./Res/Font.ttf");
-
+            window = this;
 
             this.Closed += Onclose;
             

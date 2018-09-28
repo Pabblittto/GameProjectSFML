@@ -16,6 +16,9 @@ namespace GameProject
         Texture BackImage;
         Sprite BackSite;// background Sprite
         Button Start, Options, Exit;
+        Settings settings;
+        Exit exit = new Exit();// simple object to close game
+
 
 
         public Menu(MyWindow window)
@@ -23,9 +26,12 @@ namespace GameProject
             //C: \Users\Pabblo\Desktop\SFMLProjectC#\GameProject\GameProject\Res\Menu\Image.png
                 BackImage = new Texture("./Res/Menu/Image.png");
                 BackSite = new Sprite(BackImage);
-                Start = new Button(new Vector2f(250, 50), new Vector2f(20, 20), new Color(0, 250, 255), new Color(0, 152, 155), "Start", MyWindow.MyFont,window);
-                Options = new Button(new Vector2f(250, 50), new Vector2f(20, 90), new Color(0, 250, 255), new Color(0, 152, 155), "Options", MyWindow.MyFont,window);
+                settings = new Settings(BackSite, this);
 
+                Start = new Button(new Vector2f(250, 50), new Vector2f(20, 20), new Color(0, 250, 255), new Color(0, 152, 155), "Start", MyWindow.MyFont,window,null);
+                Options = new Button(new Vector2f(250, 50), new Vector2f(20, 90), new Color(0, 250, 255), new Color(0, 152, 155), "Settings", MyWindow.MyFont,window,settings);
+                Exit = new Button(new Vector2f(250, 50), new Vector2f(20, 160), new Color(0, 250, 255), new Color(0, 152, 155), "Exit", MyWindow.MyFont,window,exit);
+                
         }
 
 
@@ -34,6 +40,7 @@ namespace GameProject
             window.Draw(BackSite);
             Start.Draw(window);
             Options.Draw(window);
+            Exit.Draw(window);
 
 
         }
@@ -42,6 +49,7 @@ namespace GameProject
         {
             Start.Functionality();
             Options.Functionality();
+            Exit.Functionality();
         }
 
 
