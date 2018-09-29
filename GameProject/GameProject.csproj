@@ -56,8 +56,12 @@
   <ItemGroup>
     <Compile Include="Elements\Button.cs" />
     <Compile Include="Elements\Functions.cs" />
+    <Compile Include="Elements\TextInput.cs" />
     <Compile Include="Exit.cs" />
     <Compile Include="Frame.cs" />
+    <Compile Include="Elements\Player.cs" />
+    <Compile Include="Game\Game.cs" />
+    <Compile Include="Game\NewPlayer.cs" />
     <Compile Include="menu.cs" />
     <Compile Include="MyWindow.cs" />
     <Compile Include="Settings.cs" />
@@ -96,8 +100,12 @@
     <Content Include="OpenTK.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Res\Menu\Image.png" />
+    <Content Include="Res\Menu\Image.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Game\Items\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

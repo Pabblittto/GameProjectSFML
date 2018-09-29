@@ -9,7 +9,7 @@ using SFML.Window;
 
 namespace GameProject.Elements
 {
-     class Functions
+    static class  Functions
     {
 
 

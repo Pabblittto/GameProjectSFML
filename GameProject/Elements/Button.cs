@@ -8,13 +8,16 @@ using SFML.System;
 using SFML.Window;
 using SFML.Audio;
 using System.Threading;
+using GameProject.Game;
 
 
 namespace GameProject.Elements
 {
     class Button
     {
-        Frame DestinationSet;
+        Action PossibleMethod;
+
+        public Frame DestinationSet;// public for fast 
         Boolean focus = false;// bool for protecting PCU against usless color setting in WhenHover
         MyWindow WindowPoint;
         Text Content;
@@ -31,14 +34,19 @@ namespace GameProject.Elements
 
             DestinationSet = Destination;
 
-            Shape = new RectangleShape(Size);
-            Shape.Position = position;
-            Shape.FillColor = color; Shape.OutlineThickness = 3;
-            Shape.OutlineColor = Color.Black;
+            Shape = new RectangleShape(Size)
+            {
+                Position = position,
+                FillColor = color,
+                OutlineThickness = 3,
+                OutlineColor = Color.Black
+            };
 
-            Content = new Text(display, UsedFont,30);
-            Content.Color = Color.Black;
-            Content.Position = new Vector2f(Shape.Position.X+5,Shape.Position.Y+10);
+            Content = new Text(display, UsedFont, 30)
+            {
+                Color = Color.Black,
+                Position = new Vector2f(Shape.Position.X + 5, Shape.Position.Y + 10)
+            };
 
         }
 
@@ -76,6 +84,11 @@ namespace GameProject.Elements
 
                 if (Functions.CheckIfMouseHover(Shape.Size, Shape.Position, WindowPoint) && Mouse.IsButtonPressed(Mouse.Button.Left))
                 {
+                    if (PossibleMethod != null)
+                    {
+                    PossibleMethod.Invoke();
+                    }
+
                     window.RenderSomeElements = NextSet.Render;
                     window.CheckSomeEents = NextSet.CheckEvents;
                     
@@ -92,9 +105,25 @@ namespace GameProject.Elements
             // function when click
         }
 
+        /// <summary>
+        /// method to move content to the center of button, unfortynaly one have to do manually :/
+        /// </summary>
+        /// <param name="xToRight"></param>
+        public void MoveText(float xToRight)
+        {
+            Content.Position = new Vector2f(Content.Position.X + xToRight, Content.Position.Y);
+        }
 
+        /// <summary>
+        /// Additional method for creating player object and creating game object- only for NewPlayerFrame
+        /// </summary>
 
+        public void AddingAdditionalFunction(Action function)
+        {
+            PossibleMethod += function;
+        }
 
+        
 
     }
 }

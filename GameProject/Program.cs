@@ -14,7 +14,7 @@ namespace GameProject
         static void Main(string[] args)
         {
 
-            MyWindow window = new MyWindow(new VideoMode(1800, 800), "GAME");
+            MyWindow window = new MyWindow(new VideoMode(1800, 900), "GAME");
             Menu MenuObj = new Menu(window);
 
             window.CheckSomeEents = MenuObj.CheckEvents;
