@@ -13,22 +13,46 @@ namespace GameProject.Game
 {
     class GameObj: Frame// game is combined with many elements
     {
-        Player User;
+        
 
-        public GameObj(Player player)// to inicialize game user must choose player- load or create new
+        Player User;
+        UserInterface UserInterface;
+
+        public GameObj()
         {
-            User = player;
+            
         }
+
+
+        public void SetPlayer(Player userObj)//really important method- game need Player obiect, almost work like constructor
+        {
+            User = userObj;
+            UserInterface = new UserInterface(User);
+            
+           
+            
+        }
+
+        
 
 
 
         public override void CheckEvents(MyWindow window)
         {
+            if (User == null)
+            {
+                throw new Exception();// Player was not set :/
+            }
+
+            UserInterface.CheckEvents();
+
+
             
         }
+
         public override void Render(MyWindow window)
         {
-            
+            UserInterface.Render();
         }
 
     }

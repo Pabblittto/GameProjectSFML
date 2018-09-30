@@ -18,12 +18,12 @@ namespace GameProject.Game
         Sprite Background;
         Button ok;// create new player
         Button back;//back to maenu
-        GameObj game;
+        
         
 
         public NewPlayer(Menu menu)
         {
-            NameInput = new TextInput(new Vector2f(400, 50), new Vector2f(690, 70), Color.Black);
+            NameInput = new TextInput(new Vector2f(450, 50), new Vector2f(665, 70), Color.Black);
 
             Info = new Text("Whats youry name Capitan?", MyWindow.MyFont, 40)
             {
@@ -31,14 +31,15 @@ namespace GameProject.Game
                 Color = Color.Black
             };
 
-            ok = new Button(new Vector2f(250, 50), new Vector2f(925, 130), new Color(0, 250, 255), new Color(0, 152, 155), "Adventure!", MyWindow.MyFont, MyWindow.window, game);// in null place one have to place pointer to player obiect
+            ok = new Button(new Vector2f(250, 50), new Vector2f(925, 130), new Color(0, 250, 255), new Color(0, 152, 155), "Adventure!", MyWindow.MyFont, MyWindow.window, MyWindow.game);// in null place one have to place pointer to player obiect
             back = new Button(new Vector2f(250, 50), new Vector2f(625, 130), new Color(0, 250, 255), new Color(0, 152, 155), "Back", MyWindow.MyFont, MyWindow.window,menu);
             ok.MoveText(50);
             back.MoveText(75);
 
             back.AddingAdditionalFunction(FocusChanged);
             ok.AddingAdditionalFunction(FocusChanged);
-            ok.AddingAdditionalFunction(ConstructGame);
+            ok.AddingAdditionalFunction(CreatePlayer);
+            
 
             Background = new Sprite(Menu.BackSite);
             Background.Color = new Color(255, 255, 255, 128);// semi transparent
@@ -72,14 +73,13 @@ namespace GameProject.Game
             Focus = false;
             Console.WriteLine("focus changed"+ Focus);
         }
-         private void ConstructGame()
+
+        // function for creating player object after clicking
+        private void CreatePlayer()
         {
-            Console.WriteLine("Gra stworzona");
-            game = new GameObj(new Player(NameInput.Content.DisplayedString));
-            ok.DestinationSet = game;// this does not work
+            ok.FutureUser = new Player(NameInput.Content.DisplayedString);
 
         }
-
 
     }
 }

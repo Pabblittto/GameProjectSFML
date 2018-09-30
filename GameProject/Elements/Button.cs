@@ -15,10 +15,12 @@ namespace GameProject.Elements
 {
     class Button
     {
-        Action PossibleMethod;
+        Action PossibleMethod;// possible additional method to run before go to next frame
 
-        public Frame DestinationSet;// public for fast 
-        Boolean focus = false;// bool for protecting PCU against usless color setting in WhenHover
+        public Player FutureUser;// if it is set, button set this player for game. its used for creating new players and seting existing ones
+
+        public Frame DestinationSet;// public for fast access
+        Boolean focus = false;// bool for protecting PCU against usless color setting in WhenHover(its infinite loop)
         MyWindow WindowPoint;
         Text Content;
         Color OnHoverColor,NormalColor;
@@ -86,7 +88,12 @@ namespace GameProject.Elements
                 {
                     if (PossibleMethod != null)
                     {
-                    PossibleMethod.Invoke();
+                        PossibleMethod.Invoke();
+                    }
+
+                    if (FutureUser != null)
+                    {
+                        MyWindow.game.SetPlayer(FutureUser);
                     }
 
                     window.RenderSomeElements = NextSet.Render;
@@ -117,13 +124,15 @@ namespace GameProject.Elements
         /// <summary>
         /// Additional method for creating player object and creating game object- only for NewPlayerFrame
         /// </summary>
-
         public void AddingAdditionalFunction(Action function)
         {
             PossibleMethod += function;
         }
 
-        
+
+
+
+
 
     }
 }

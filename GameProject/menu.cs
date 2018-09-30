@@ -28,7 +28,7 @@ namespace GameProject
         public Menu(MyWindow window)
         {
          
-                BackImage = new Texture("./Res/Menu/Image.png");
+                BackImage = new Texture("Res/Menu/Image.png");
                 BackSite = new Sprite(BackImage);
                 settings = new Settings(BackSite, this);
                 newPlayer = new NewPlayer(this);
