@@ -31,8 +31,8 @@ namespace GameProject
                 window.Clear();
                 window.DispatchEvents();
 
-                window.CheckSomeEents.Invoke(window);
                 window.RenderSomeElements.Invoke(window);
+                window.CheckSomeEents.Invoke(window);
 
 
                 window.Display();

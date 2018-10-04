@@ -62,8 +62,9 @@
     <Compile Include="Elements\Player.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\NewPlayer.cs" />
+    <Compile Include="Game\Objects\Cannon.cs" />
     <Compile Include="Game\Objects\Card.cs" />
-    <Compile Include="Game\Objects\Item.cs" />
+    <Compile Include="Game\Objects\Cargo.cs" />
     <Compile Include="Game\Objects\Sailor.cs" />
     <Compile Include="Game\Objects\Ship.cs" />
     <Compile Include="Game\Objects\UsrShip.cs" />
@@ -106,6 +107,7 @@
     <Content Include="OpenTK.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Res\Cards\Wheat.png" />
     <Content Include="Res\Menu\Image.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

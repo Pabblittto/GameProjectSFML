@@ -13,7 +13,9 @@ namespace GameProject.Elements
     {
 
 
-
+        /// <summary>
+        /// function to check if mouse is hoveren on object
+        /// </summary
         public static Boolean CheckIfMouseHover(Vector2f SizeOfElement,Vector2f PositionOfElement, MyWindow window)
         {
             

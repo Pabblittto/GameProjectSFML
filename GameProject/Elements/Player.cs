@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameProject.Elements
 {
-    class Player// player contains all informations
+    class Player// player contains all informations, its like save
     {
          String name;
 
@@ -16,10 +16,7 @@ namespace GameProject.Elements
             name = _name;
         }
 
-        /// <summary>
-        /// Really dangerous to make it public, but o dont have any better idea :/
-        /// Set all basic propreties;
-        /// </summary>
+        // need to make constructor to loading save from file
 
 
     }

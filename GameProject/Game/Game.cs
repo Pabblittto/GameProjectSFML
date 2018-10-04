@@ -8,19 +8,21 @@ using SFML.Window;
 using SFML.Graphics;
 using SFML.Audio;
 using GameProject.Elements;
+using GameProject.Game.Objects;
 
 namespace GameProject.Game
 {
     class GameObj: Frame// game is combined with many elements
     {
-        //RectangleShape test = new RectangleShape(new Vector2f(90, 90));
+        
+        
 
         Player User;
         UserInterface UserInterface;
 
         public GameObj()
         {
-            
+
         }
 
 
@@ -28,14 +30,20 @@ namespace GameProject.Game
         {
             User = userObj;
             UserInterface = new UserInterface(User);
-            //test.FillColor = Color.Cyan;
+
            
             
         }
 
-        
 
 
+
+        public override void Render(MyWindow window)
+        {
+            UserInterface.Render();
+
+
+        }
 
         public override void CheckEvents(MyWindow window)
         {
@@ -50,11 +58,7 @@ namespace GameProject.Game
             
         }
 
-        public override void Render(MyWindow window)
-        {
-            UserInterface.Render();
-            //window.Draw(test);
-        }
+
 
     }
 }
