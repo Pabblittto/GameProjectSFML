@@ -11,6 +11,7 @@ namespace GameProject
 {
     class Program
     {
+        public static Clock clock = new Clock();
         static void Main(string[] args)
         {
 
@@ -22,6 +23,11 @@ namespace GameProject
 
             while (window.IsOpen)
             {
+                clock.Restart();
+
+                MyWindow.UpdateTickTAck();
+
+
                 window.Clear();
                 window.DispatchEvents();
 

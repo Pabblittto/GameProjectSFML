@@ -13,7 +13,7 @@ namespace GameProject.Game
 {
     class GameObj: Frame// game is combined with many elements
     {
-        
+        //RectangleShape test = new RectangleShape(new Vector2f(90, 90));
 
         Player User;
         UserInterface UserInterface;
@@ -28,7 +28,7 @@ namespace GameProject.Game
         {
             User = userObj;
             UserInterface = new UserInterface(User);
-            
+            //test.FillColor = Color.Cyan;
            
             
         }
@@ -53,6 +53,7 @@ namespace GameProject.Game
         public override void Render(MyWindow window)
         {
             UserInterface.Render();
+            //window.Draw(test);
         }
 
     }

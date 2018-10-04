@@ -13,6 +13,10 @@ namespace GameProject
 {
     class MyWindow : RenderWindow
     {
+        public static int TickTAck = 1;// intresting variable.  If some event need unstopable mouse focus on it(for some period), its method check if TickTack 
+                                       // have next values, ich there is lack of continuity it means that user moved mouse from item, and Time of focus 
+                                       // need to be calculated again
+
         public static GameObj game= new GameObj();// static obiect of game- easy access :)
         
         public static Font MyFont;
@@ -41,7 +45,15 @@ namespace GameProject
             window.Close();
         }
 
-
+        public static void UpdateTickTAck()
+        {
+            if (TickTAck == 1000)
+            {
+                TickTAck = 1;
+            }
+            else
+                TickTAck++;
+        }
 
 
 
