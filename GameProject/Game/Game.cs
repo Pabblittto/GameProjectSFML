@@ -19,6 +19,7 @@ namespace GameProject.Game
 
         Player User;
         UserInterface UserInterface;
+        View MainMap;
 
         public GameObj()
         {
@@ -30,6 +31,7 @@ namespace GameProject.Game
         {
             User = userObj;
             UserInterface = new UserInterface(User);
+            MainMap = new View(User);
 
            
             
@@ -40,9 +42,8 @@ namespace GameProject.Game
 
         public override void Render(MyWindow window)
         {
+            MainMap.Render();
             UserInterface.Render();
-
-
         }
 
         public override void CheckEvents(MyWindow window)
@@ -51,9 +52,9 @@ namespace GameProject.Game
             {
                 throw new Exception();// Player was not set :/
             }
+            MainMap.CheckEvents();
 
             UserInterface.CheckEvents();
-
 
             
         }

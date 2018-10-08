@@ -17,6 +17,8 @@ namespace GameProject.Game
         Cargo test;
         RectangleShape AllField;
         Player User;
+
+        
         
 
         public UserInterface(Player PlayerObj)

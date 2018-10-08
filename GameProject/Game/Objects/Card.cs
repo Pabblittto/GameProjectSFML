@@ -29,7 +29,7 @@ namespace GameProject.Game.Objects
                                     // this shouldnt be long, or one have to write code to divite it to rows
 
         Texture Image;
-        RectangleShape shape = new RectangleShape(new Vector2f(90, 90));
+        RectangleShape shape = new RectangleShape(new Vector2f(70, 70));
 
 
         RectangleShape InfoShape;
@@ -92,7 +92,7 @@ namespace GameProject.Game.Objects
 
             if (AdditionInfo != "")// if additional info is added- add it XD
             {
-                Info.DisplayedString += AdditionInfo;
+                Info.DisplayedString += AdditionInfo+"\n";
             }
 
         }
@@ -120,9 +120,9 @@ namespace GameProject.Game.Objects
 
             if (hovered==true)
             {
-                Console.WriteLine(TimeOfHover.AsSeconds());
+               
 
-                if(TimeOfHover.AsSeconds()>0.3 )
+                if(TimeOfHover.AsSeconds()>0.1 )
                 {
                     DisplayInfo = true;
                 }
