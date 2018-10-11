@@ -14,15 +14,25 @@ namespace GameProject.Game
 {
     class GameObj: Frame// game is combined with many elements
     {
-        
+        SFML.Graphics.View UserLeftSite;
+        SFML.Graphics.View MapRightSite;
         
 
         Player User;
         UserInterface UserInterface;
-        View MainMap;
+        Map MyMap;
+
 
         public GameObj()
         {
+            UserLeftSite = new SFML.Graphics.View(new FloatRect(0,0,800,900));
+            UserLeftSite.Viewport = new FloatRect(0,0,8/18f,1f);
+
+            MapRightSite = new SFML.Graphics.View(new FloatRect(0,0,1000,900));
+            MapRightSite.Viewport = new FloatRect(8 / 18f, 0, 10 / 18f, 1f);
+            
+
+
 
         }
 
@@ -31,10 +41,9 @@ namespace GameProject.Game
         {
             User = userObj;
             UserInterface = new UserInterface(User);
-            MainMap = new View(User);
+            MyMap = new Map(userObj);
+            MapRightSite.Center = MyMap.ShipPosition;
 
-           
-            
         }
 
 
@@ -42,19 +51,47 @@ namespace GameProject.Game
 
         public override void Render(MyWindow window)
         {
-            MainMap.Render();
+            window.SetView(UserLeftSite);
             UserInterface.Render();
+            UserInterface.CheckEvents();
+
+            window.SetView(MapRightSite);
+            MyMap.TilesOnWindow(MapRightSite);
+            MyMap.Render();
+            Console.WriteLine("Pozycja centrum kamery:"+MapRightSite.Center.X +" "+ MapRightSite.Center.Y);
+           
+            
+
         }
 
-        public override void CheckEvents(MyWindow window)
+        public override void CheckEvents(MyWindow window)// prawdopodobnie to jest nie potrzebne
         {
             if (User == null)
             {
                 throw new Exception();// Player was not set :/
             }
-            MainMap.CheckEvents();
+            // MainMap.CheckEvents();
 
-            UserInterface.CheckEvents();
+
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Down ))
+            {
+                MapRightSite.Move(new Vector2f(0, 1));
+            }
+
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Up ))
+            {
+                MapRightSite.Move(new Vector2f(0, -1));
+            }
+
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Right ))
+            {
+                MapRightSite.Move(new Vector2f(1, 0));
+            }
+
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Left ))
+            {
+                MapRightSite.Move(new Vector2f(-1, 0));
+            }
 
             
         }

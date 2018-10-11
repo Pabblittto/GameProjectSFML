@@ -122,7 +122,7 @@ namespace GameProject.Game.Objects
             {
                
 
-                if(TimeOfHover.AsSeconds()>0.1 )
+                if(TimeOfHover.AsSeconds()>0.01 )
                 {
                     DisplayInfo = true;
                 }

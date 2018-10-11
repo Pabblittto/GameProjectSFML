@@ -12,6 +12,7 @@ namespace GameProject.Game.Objects
     class UsrShip:Drawable // movable ship which is displaed on screen
     {
         RectangleShape ShipRectangle;
+        public Vector2f PositionOnMap;
 
 
         public UsrShip(Ship ShipUsedByPlayer)

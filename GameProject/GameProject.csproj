@@ -61,6 +61,7 @@
     <Compile Include="Frame.cs" />
     <Compile Include="Elements\Player.cs" />
     <Compile Include="Game\Objects\Map.cs" />
+    <Compile Include="Game\Objects\MyTile.cs" />
     <Compile Include="Game\View.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\NewPlayer.cs" />

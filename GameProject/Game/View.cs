@@ -26,7 +26,7 @@ namespace GameProject.Game
             User = _User;
             Field = new RectangleShape(new Vector2f(1000, 900));
             Field.Position = new Vector2f(800, 0);
-            Field.FillColor = Color.Magenta;
+            Field.FillColor = new Color(0,0,0,255);
 
             ship = new Texture("./Res/Ships/Ship2.png");
             test = new RectangleShape(new Vector2f(60, 100));
