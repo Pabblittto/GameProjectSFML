@@ -25,7 +25,7 @@ namespace GameProject.Elements
         Text Content;
         Color OnHoverColor,NormalColor;
         RectangleShape Shape;
-        public delegate void FunctionEventHandler();
+        
 
         public Button(Vector2f Size, Vector2f position ,Color color, Color OnHover, string display, Font UsedFont,MyWindow window, Frame Destination)
         {

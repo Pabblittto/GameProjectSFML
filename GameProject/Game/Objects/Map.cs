@@ -23,6 +23,11 @@ namespace GameProject.Game.Objects
         private int nr_columns;
         private int nr_rows;
 
+        Texture land;
+        Texture error;
+        Texture water;
+
+
         private List<RectangleShape> TilesOnScreen = new List<RectangleShape>();
 
 
@@ -85,10 +90,10 @@ namespace GameProject.Game.Objects
             MapStructure = new RectangleShape[nr_rows, nr_columns];
 
             //ShipPosition = User.UserShip.PositionOnMap;
-
+            this.LoadTextures();
 
             CreateMapStructre(nr_columns, nr_rows, Matrix, MapStructure);
-            
+
 
         }
 
@@ -103,30 +108,30 @@ namespace GameProject.Game.Objects
                 {
                     MapArray[actualRow, actualColumn] = new RectangleShape(StandardTileSize)
                     {
-                        Position = new Vector2f(actualColumn*StandardTileSize.X,actualRow*StandardTileSize.Y),
-                        FillColor= SetTextureOfTile(Array[actualRow,actualColumn])
+                        Position = new Vector2f(actualColumn * StandardTileSize.X, actualRow * StandardTileSize.Y),
+                        Texture = SetTextureOfTile(Array[actualRow, actualColumn])
                     };
                 }
             }
         }
 
-        
 
 
-        private Color SetTextureOfTile(int numberInArray) // function for setting texture for all tiles ona map
+
+        private Texture SetTextureOfTile(int numberInArray) // function for setting texture for all tiles ona map
         {
             switch (numberInArray)
             {
                 case 0:
                     {
-                        return Color.Blue;// if the tile is water
+                        return water;// if the tile is water
                     }
                 case 1:
                     {
-                        return Color.Green;// if the tile is land
+                        return land;// if the tile is land
                     }
                 default:
-                    return Color.Black;// something gone wrong
+                    return error;// something gone wrong
             }
         }
 
@@ -134,18 +139,6 @@ namespace GameProject.Game.Objects
 
         public void RenderMap(int nr_columns, int nr_rows)
         {
-            //for (int i = 0; i < nr_rows; i++)
-            //{
-            //    for (int j = 0; j < nr_columns ; j++)
-            //    {
-            //        MyWindow.window.Draw(MapStructure[i, j]);
-            //    }
-            //}
-            //foreach (RectangleShape item in TilesOnScreen)
-            //{
-            //    MyWindow.window.Draw(item);
-
-            //}
 
             for (int i = 0; i < TilesOnScreen.Count; i++)
             {
@@ -156,7 +149,12 @@ namespace GameProject.Game.Objects
         }
 
 
-
+        private void LoadTextures()
+        {
+            land = new Texture("Res/Map/land.bmp");
+            water = new Texture("Res/Map/water.bmp");
+            error = new Texture("Res/Map/error.bmp");
+        }
 
 
 
@@ -174,11 +172,11 @@ namespace GameProject.Game.Objects
         {
             TilesOnScreen.Clear();
 
-            int UpRow = (int)((view.Center.Y - 500 )/ 80);
-            int DownRow = (int)((view.Center.Y + 500 )/ 80);
+            int UpRow = (int)((view.Center.Y - 700 )/ 80);
+            int DownRow = (int)((view.Center.Y + 700 )/ 80);
 
-            int LeftColumn = (int)((view.Center.X - 500) / 80);
-            int RightColumn = (int)((view.Center.X + 500) / 80);
+            int LeftColumn = (int)((view.Center.X - 700) / 80);
+            int RightColumn = (int)((view.Center.X + 700) / 80);
 
             if (UpRow < 0) { UpRow = 0; };
             if(DownRow> nr_rows - 1) { DownRow = nr_rows - 1; };
@@ -194,12 +192,7 @@ namespace GameProject.Game.Objects
                     TilesOnScreen.Add(MapStructure[i, j]);
 
                 }
-
-
             }
-
-
-            
         }
 
 

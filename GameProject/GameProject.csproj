@@ -55,7 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Elements\Button.cs" />
+    <Compile Include="Elements\Button2.cs" />
     <Compile Include="Elements\Functions.cs" />
+    <Compile Include="Elements\PossibleSave.cs" />
     <Compile Include="Elements\TextInput.cs" />
     <Compile Include="Exit.cs" />
     <Compile Include="Frame.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="Game\Objects\Ship.cs" />
     <Compile Include="Game\Objects\UsrShip.cs" />
     <Compile Include="Game\UserInterface.cs" />
+    <Compile Include="Loading.cs" />
     <Compile Include="menu.cs" />
     <Compile Include="MyWindow.cs" />
     <Compile Include="Settings.cs" />

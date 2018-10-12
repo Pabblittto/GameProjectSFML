@@ -12,6 +12,11 @@ namespace GameProject.Elements
     static class  Functions
     {
 
+        public static void LoadPlayer(Player sa)
+        {
+
+        }
+
 
         /// <summary>
         /// function to check if mouse is hoveren on object

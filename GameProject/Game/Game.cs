@@ -58,7 +58,6 @@ namespace GameProject.Game
             window.SetView(MapRightSite);
             MyMap.TilesOnWindow(MapRightSite);
             MyMap.Render();
-            Console.WriteLine("Pozycja centrum kamery:"+MapRightSite.Center.X +" "+ MapRightSite.Center.Y);
            
             
 
@@ -93,7 +92,18 @@ namespace GameProject.Game
                 MapRightSite.Move(new Vector2f(-1, 0));
             }
 
-            
+            if (Keyboard.IsKeyPressed(Keyboard.Key.D))
+            {
+                MapRightSite.Rotate(1);
+            }
+
+            if (Keyboard.IsKeyPressed(Keyboard.Key.A))
+            {
+                MapRightSite.Rotate(-1);
+            }
+
+
+
         }
 
 
