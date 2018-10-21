@@ -17,18 +17,18 @@ namespace GameProject.Elements
 
         Boolean focus = false;
         Text Content;
-        RectangleShape Shape;
+        public RectangleShape Shape;
         Color OnHoverColor, NormalColor;
         string OptionallySTR;
 
         
 
-        public Button2(Vector2f position, Vector2f size, Color Background,Color OnHover, Font UsedFont,string ToDisplay,uint CharacterSize, FunctionToDo Funct,string OptionallyStr)
+        public Button2(Vector2f position, Vector2f size, Color Background,Color OnHover, Font UsedFont,string ToDisplay,uint CharacterSize)
         {
-            OptionallySTR = OptionallyStr;
+           
             OnHoverColor = OnHover;
             NormalColor = Background;
-            Adding += Funct;
+           
 
             Shape = new RectangleShape(size)
             {
@@ -52,7 +52,8 @@ namespace GameProject.Elements
         {
             if (Functions.CheckIfMouseHover(Shape.Size, Shape.Position, MyWindow.window) && Mouse.IsButtonPressed(Mouse.Button.Left))
             {
-                Adding(this.OptionallySTR);
+                Adding.Invoke(this.OptionallySTR) ;
+                
             }
 
         }
@@ -80,11 +81,32 @@ namespace GameProject.Elements
             }
         }
 
+        /// <summary>
+        /// Setting Funtion on click with deleting others in list
+        /// </summary>
+        public void setFunction(FunctionToDo toDo, string PossibleString)
+        {
+            OptionallySTR = PossibleString;
+            Adding = null;
+            Adding += toDo;
+        }
+
+        /// <summary>
+        /// Adding function to delegate- possible multiple functions, There should be funtions without arguments- dead string
+        /// </summary>
+        public void addFuncton(FunctionToDo toDo, string PossibleString)
+        {
+            Adding += toDo;
+        }
+
+
+
         public void Draw(RenderTarget window,RenderStates states)
         {
             this.WhenHover();
             this.Onclick();
             window.Draw(Shape);
+            window.Draw(Content);
 
         }
     }

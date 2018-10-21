@@ -14,11 +14,15 @@ namespace GameProject.Game.Objects
     {
         Text Info = new Text("",MyWindow.MyFont,20);
 
-
+        Vector2f Position;// this position is permanent, set only in cardSlots
         Boolean DisplayInfo = false;
         Boolean hovered = false;
         Time TimeOfHover;
-       
+        Boolean Dragging = false;
+        Boolean OnHovered = false;
+        //public CardSlot<Card> Slot; // i decidet that this is useless
+
+
         protected List<String> InfoToDisplay;// its list with info for displaying in additional rectangle, this should be overriden somewhere
                                             // the idea is simple, strings are added in pairs like:
                                             // "Property","Value"
@@ -29,7 +33,7 @@ namespace GameProject.Game.Objects
                                     // this shouldnt be long, or one have to write code to divite it to rows
 
         Texture Image;
-        RectangleShape shape = new RectangleShape(new Vector2f(70, 70));
+        public RectangleShape shape = new RectangleShape(new Vector2f(70, 70));
 
 
         RectangleShape InfoShape;
@@ -54,19 +58,20 @@ namespace GameProject.Game.Objects
         {
             window.Draw(shape);
             OnHover();
+            Drag();
         }
 
         public void SetItemPosition(Vector2f position)
         {
+            Position = position;
             shape.Position = position;
-
         }
         /// <summary>
         /// Text need to be set first
         /// </summary>
         public void DrawInfoBox()
         {
-            if (DisplayInfo==true) {
+            if (DisplayInfo==true && Dragging==false && MyWindow.MouseIsDragging==false) {
                 if (InfoShape.Size == new Vector2f(0, 0))
                 {
                     InfoShape.Size = new Vector2f(Info.GetLocalBounds().Width + 10, Info.GetLocalBounds().Height + 10);// added 5 pixel padding
@@ -81,9 +86,8 @@ namespace GameProject.Game.Objects
 
         }
 
-        public void SetInfo()
+        public void SetInfo()// function which need to be played in sonstructors of obiects
         {
-
 
             for (int i = 0; i < InfoToDisplay.Count ; i+=2)
             {
@@ -96,10 +100,6 @@ namespace GameProject.Game.Objects
             }
 
         }
-
-
-
-
 
         private void OnHover()// this is activated while displayng
         {
@@ -120,8 +120,6 @@ namespace GameProject.Game.Objects
 
             if (hovered==true)
             {
-               
-
                 if(TimeOfHover.AsSeconds()>0.01 )
                 {
                     DisplayInfo = true;
@@ -133,9 +131,39 @@ namespace GameProject.Game.Objects
             }
         }
 
+        /// <summary>
+        /// function responsible for moving card between cardslots
+        /// </summary>
+        private void Drag()
+        {
+            
+            
+                if ((hovered == true && Mouse.IsButtonPressed(Mouse.Button.Left) && MyWindow.MouseIsDragging==false) || Dragging == true)
+                {
+                    MyWindow.MouseIsDragging = true;
+                    MyWindow.DraggedCard = this;
+                    Dragging = true;
+                    shape.Position = (Vector2f)Mouse.GetPosition(MyWindow.window) - shape.Size / 2;
 
+                }
 
+                if (!Mouse.IsButtonPressed(Mouse.Button.Left) && Dragging == true)
+                {
+                   
+                    MyWindow.MouseIsDragging = false;
+                    MyWindow.DraggedCard = null;
+                    Dragging = false;
+                    shape.Position = Position;
+                }
+        }
 
+        //public void SetCardSlot(CardSlot<Card> slot)
+        //{
+        //    Slot = slot;
+        //}
+        
+
+        
 
 
     }

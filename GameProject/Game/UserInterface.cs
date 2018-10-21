@@ -15,6 +15,8 @@ namespace GameProject.Game
     {
         Cannon cannontest;
         Cargo test;
+        CardSlot<Cargo> CargoSlot1;
+        CardSlot<Cargo> CargoSlot2;
         RectangleShape AllField;
         Player User;
 
@@ -28,9 +30,15 @@ namespace GameProject.Game
                 Repeated = true
             };
             
-            
+
+
             AllField = new RectangleShape(new Vector2f(800, 900));
             AllField.Texture = tem;
+
+
+            CargoSlot1 = new CardSlot<Cargo>(new Vector2f(20, 200), "./Res/Cards/slot.png");
+            CargoSlot2 = new CardSlot<Cargo>(new Vector2f(20, 300), "./Res/Cards/slot.png");
+
 
             test = new Cargo("./Res/Cards/Wheat.png", "", "Wheat", 35, 1);
             test.SetItemPosition(new Vector2f(10, 10));
@@ -44,6 +52,9 @@ namespace GameProject.Game
         public void Render()
         {
             MyWindow.window.Draw(AllField);
+            MyWindow.window.Draw(CargoSlot1);
+            MyWindow.window.Draw(CargoSlot2);
+
             MyWindow.window.Draw(test);
             MyWindow.window.Draw(cannontest);
 

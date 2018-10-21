@@ -13,7 +13,7 @@ namespace GameProject.Game.Objects
         String Name;
         float Price;
         uint AmountOfCArgo;
-
+       
 
 
         public Cargo(String Path,String AdditionalInfo, String nameOfCargo, float price,uint amount):base(Path,AdditionalInfo) 

@@ -7,12 +7,19 @@ using SFML.System;
 using SFML.Window;
 using SFML.Graphics;
 using GameProject.Game;
+using GameProject.Game.Objects;
 
 
 namespace GameProject
 {
     class MyWindow : RenderWindow
     {
+        public static bool MouseIsDragging = false;
+        public static Card DraggedCard = null;
+       
+
+        public static float MaxDistanceSlot_Card = 1.4f * 36 + 1.4f * 20;// excuse: diagonal of Cardslot + diagonal of small rectangle in Card
+
         public static int TickTAck = 1;// intresting variable.  If some event need unstopable mouse focus on it(for some period), its method check if TickTack 
                                        // have next values, ich there is lack of continuity it means that user moved mouse from item, and Time of focus 
                                        // need to be calculated again

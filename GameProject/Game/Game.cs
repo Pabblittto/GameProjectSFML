@@ -43,7 +43,6 @@ namespace GameProject.Game
             UserInterface = new UserInterface(User);
             MyMap = new Map(userObj);
             MapRightSite.Center = MyMap.ShipPosition;
-
         }
 
 
