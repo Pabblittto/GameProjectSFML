@@ -1,6 +1,6 @@
 # GameProjectSFML
-We will see if there wil be any progress
-Few weeks later...
+We will see if there wil be any progress</br>
+Few weeks later...</br>
 So... The project is slowly developed. I am IT student, that's why commits are not very often.
 Below I wrote what I am going to implement in my game. Hovever, some of these features can never appear. 
 In would be no comercial project, which shows my programming skills and how clean code can i create.(educational puropuse)
