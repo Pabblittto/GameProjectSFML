@@ -11,8 +11,13 @@ using GameProject.Game.Objects;
 
 namespace GameProject.Game.Objects
 {
-    class CardSlot<Type> : Drawable where Type: Card  
+    class CardSlot<Type> : Slot,Drawable where Type: Card 
     {
+        Boolean hovered = false;
+
+        public Boolean avavailable = true;
+
+
         public RectangleShape shape;
         private Vector2f Pos;
         public Vector2f CardPos;// this position will be taken by card
@@ -35,13 +40,14 @@ namespace GameProject.Game.Objects
             };
         }
 
-        public void SetCardIn(Card card)
+        public override void SetCardIn(Card card)
         {
             CardInSlot = card;
 
             if (card != null)
             {
                 card.SetItemPosition(this.CardPos);
+                card.SetCardSlot(this);
             }
         }
 
@@ -49,6 +55,39 @@ namespace GameProject.Game.Objects
         {
             window.Draw(shape);
             Functions.DropOnSlot(MyWindow.DraggedCard, this);
+            
         }
+
+        public void Disable()
+        {
+            avavailable = false;
+            shape.FillColor = new Color(40,29,5);
+        }
+
+        public void Unlock()
+        {
+            avavailable = true;
+            shape.FillColor = Color.White;
+        }
+
+
+
+        public void OnHover()// maybe need to use somewhere
+        {
+            if (Functions.CheckIfMouseHover(shape.Size, shape.Position, MyWindow.window) && hovered == false)// this function run only once, when mouse is hovered on item
+            {
+                hovered = true;
+                shape.FillColor = new Color(173, 173, 173);
+
+            }
+
+            if (!Functions.CheckIfMouseHover(shape.Size, shape.Position, MyWindow.window) && hovered == true)// this function run only once, when mouse is hovered out item
+            {
+                hovered = false;
+                shape.FillColor = Color.White;
+            }
+
+        }
+
     }
 }

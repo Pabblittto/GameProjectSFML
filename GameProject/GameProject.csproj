@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Elements\AdminSave.cs" />
     <Compile Include="Elements\Button.cs" />
     <Compile Include="Elements\Button2.cs" />
     <Compile Include="Elements\Functions.cs" />
@@ -65,7 +66,9 @@
     <Compile Include="Game\Objects\CardSlot.cs" />
     <Compile Include="Game\Objects\Map.cs" />
     <Compile Include="Game\Objects\MyTile.cs" />
+    <Compile Include="Game\Objects\Slot.cs" />
     <Compile Include="Game\Objects\Wind.cs" />
+    <Compile Include="Game\UsrInt\ShipCrewContainer.cs" />
     <Compile Include="Game\View.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\NewPlayer.cs" />

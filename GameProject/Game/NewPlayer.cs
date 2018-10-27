@@ -77,8 +77,7 @@ namespace GameProject.Game
         // function for creating player object after clicking
         private void CreatePlayer()
         {
-            ok.FutureUser = new Player(NameInput.Content.DisplayedString);
-
+            ok.FutureUser = new Player(NameInput.Content.DisplayedString, Functions.GenerateMap(1), GameObj.BeginnerShip);
         }
 
     }

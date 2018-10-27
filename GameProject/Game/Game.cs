@@ -16,7 +16,8 @@ namespace GameProject.Game
     {
         SFML.Graphics.View UserLeftSite;
         SFML.Graphics.View MapRightSite;
-        
+        static public Ship BeginnerShip = new Ship(new Vector2f(65, 100), 5, 10, 5, "Res/Ships/Ship2.png","Res/Ships/Side.png",new Vector2f(20,20),90);
+
 
         Player User;
         UserInterface UserInterface;
@@ -57,6 +58,11 @@ namespace GameProject.Game
             window.SetView(MapRightSite);
             MyMap.TilesOnWindow(MapRightSite);
             MyMap.Render();
+            if (User != null)
+            {
+                User.UserShip.UpdateView(MapRightSite);
+                window.Draw(User.UserShip);
+            }
            
             
 
@@ -70,39 +76,35 @@ namespace GameProject.Game
             }
             // MainMap.CheckEvents();
 
+            //if (Keyboard.IsKeyPressed(Keyboard.Key.Down))
+            //{
+            //    MapRightSite.Move(new Vector2f(0, 1));
+            //}
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Down ))
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Up))
             {
-                MapRightSite.Move(new Vector2f(0, 1));
+                User.UserShip.Move(1);
             }
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Up ))
-            {
-                MapRightSite.Move(new Vector2f(0, -1));
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Right ))
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Right))
             {
                 MapRightSite.Move(new Vector2f(1, 0));
             }
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Left ))
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Left))
             {
                 MapRightSite.Move(new Vector2f(-1, 0));
             }
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.D))
             {
-                MapRightSite.Rotate(1);
+                User.UserShip.Rotate(0.5f);                  
             }
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.A))
             {
-                MapRightSite.Rotate(-1);
+                User.UserShip.Rotate( -0.5f);
             }
-
-
-
         }
 
 

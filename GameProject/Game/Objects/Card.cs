@@ -21,7 +21,7 @@ namespace GameProject.Game.Objects
         Boolean Dragging = false;
         Boolean OnHovered = false;
         //public CardSlot<Card> Slot; // i decidet that this is useless
-
+        public Slot Slot;
 
         protected List<String> InfoToDisplay;// its list with info for displaying in additional rectangle, this should be overriden somewhere
                                             // the idea is simple, strings are added in pairs like:
@@ -157,14 +157,10 @@ namespace GameProject.Game.Objects
                 }
         }
 
-        //public void SetCardSlot(CardSlot<Card> slot)
-        //{
-        //    Slot = slot;
-        //}
-        
-
-        
-
+        public void SetCardSlot(Slot slot)
+        {
+            Slot = slot;
+        }
 
     }
 }

@@ -59,8 +59,6 @@ namespace GameProject.Game
 
 
 
-
-
         private void Move()
         {
             if(Keyboard.IsKeyPressed(Keyboard.Key.Left))

@@ -9,21 +9,16 @@ using SFML.Window;
 
 namespace GameProject.Game.Objects
 {
-    class UsrShip:Drawable // movable ship which is displaed on screen
+    class UsrShip:Ship // movable ship which is displaed on screen
     {
-        RectangleShape ShipRectangle;
-        public Vector2f PositionOnMap;
 
 
-        public UsrShip(Ship ShipUsedByPlayer)
+        public UsrShip(Vector2f SizeOfShip, uint CrewAmount, uint TrunkAmount, uint CanoonAmount, string TexturePath,string TexttureSideShip, Vector2f positionOfShip, float Degree) :base(SizeOfShip,CrewAmount,TrunkAmount,CanoonAmount,TexturePath,TexttureSideShip,positionOfShip,Degree)
         {
-            // SpipRectangle set by ShipUsedByPlayer
+            
         }
 
-        public void Draw(RenderTarget window,RenderStates states)
-        {
 
-        }
 
 
     }

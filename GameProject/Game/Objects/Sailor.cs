@@ -9,17 +9,20 @@ using SFML.Window;
 
 namespace GameProject.Game.Objects
 {
-    class Sailor// class for making possible members of player's crew
+    class Sailor:Card // class for making possible members of player's crew
     {
-         String name;
-        float CanoonReloading;
-        float HoldLoading;// two variables presented in percent
-                          // it means how these activities are faster
+        public string name;
+        int Hp;
+        int Class;
 
-        public Sailor(float CanoonPercent, float HoldPercent, String _name,String filePath)
+        public Sailor(string PathPhoto, string AdditionalInfo,string _name, int _hp, int _Class) : base(PathPhoto,AdditionalInfo)
         {
+            name = _name;
+            Hp = _hp;
+            Class = _Class;
 
-            HoldLoading = HoldPercent;
+            InfoToDisplay = new List<string>() { "Sailor", "", };
+                
         }
            
     }
