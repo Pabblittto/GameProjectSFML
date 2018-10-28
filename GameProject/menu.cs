@@ -49,20 +49,17 @@ namespace GameProject
         public override void Render(MyWindow window)// function for rendering all obiects only draw in right order
         {
             window.Draw(BackSite);
-            NewGame.Draw(window);
-            Load.Draw(window);
-            Options.Draw(window);
-            Exit.Draw(window);
+            window.Draw(NewGame);
+            window.Draw(Load);
+            window.Draw(Options);
+            window.Draw(Exit);
 
 
         }
 
         public override void CheckEvents(MyWindow window)// function for checking events
         {
-            NewGame.Functionality();
-            Load.Functionality();
-            Options.Functionality();
-            Exit.Functionality();
+
         }
 
 

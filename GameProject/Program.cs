@@ -11,12 +11,13 @@ namespace GameProject
 {
     class Program
     {
-        public static Clock clock = new Clock();
+        static public Menu MenuObj;
+        public static Clock clock = new Clock();// global clock to make some hronical events etc.
         static void Main(string[] args)
         {
 
             MyWindow window = new MyWindow(new VideoMode(1800, 900), "GAME");
-            Menu MenuObj = new Menu(window);
+              MenuObj = new Menu(window);
 
             window.CheckSomeEents = MenuObj.CheckEvents;
             window.RenderSomeElements = MenuObj.Render;

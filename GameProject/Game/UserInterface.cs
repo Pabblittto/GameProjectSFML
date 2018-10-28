@@ -25,7 +25,7 @@ namespace GameProject.Game
         RectangleShape AllField;
         Player User;
         ShipCrewContainer CrewContainer;
-        
+    
         
 
         public UserInterface(Player PlayerObj)
@@ -54,15 +54,14 @@ namespace GameProject.Game
 
             User = PlayerObj;
             CrewContainer = new ShipCrewContainer(User);
+       
 
         }
 
         public void Render()
         {
   
-
             MyWindow.window.Draw(AllField);
-
 
             //MyWindow.window.Draw(CargoSlot1);
             //MyWindow.window.Draw(CargoSlot2);
@@ -81,6 +80,8 @@ namespace GameProject.Game
 
         public void CheckEvents()
         {
+
+
             //test.DrawInfoBox();
             //test1.DrawInfoBox();
             //cannontest.DrawInfoBox();

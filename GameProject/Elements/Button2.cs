@@ -42,7 +42,7 @@ namespace GameProject.Elements
             Content = new Text(ToDisplay, UsedFont, CharacterSize)
             {
                 Color = Color.Black,
-                Position = new Vector2f(Shape.Position.X + 5, Shape.Position.Y + 10)
+                Position = new Vector2f(Shape.Position.X + 5, Shape.Position.Y + 5)
             };
 
         }

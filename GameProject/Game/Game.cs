@@ -9,6 +9,7 @@ using SFML.Graphics;
 using SFML.Audio;
 using GameProject.Elements;
 using GameProject.Game.Objects;
+using GameProject.Game.UsrInt;
 
 namespace GameProject.Game
 {
@@ -22,6 +23,8 @@ namespace GameProject.Game
         Player User;
         UserInterface UserInterface;
         Map MyMap;
+        SettingsOnGame settings;
+        
 
 
         public GameObj()
@@ -44,6 +47,7 @@ namespace GameProject.Game
             UserInterface = new UserInterface(User);
             MyMap = new Map(userObj);
             MapRightSite.Center = MyMap.ShipPosition;
+            settings = new SettingsOnGame(userObj);
         }
 
 
@@ -63,7 +67,8 @@ namespace GameProject.Game
                 User.UserShip.UpdateView(MapRightSite);
                 window.Draw(User.UserShip);
             }
-           
+            window.SetView(window.DefaultView);
+            window.Draw(settings);
             
 
         }
@@ -76,14 +81,17 @@ namespace GameProject.Game
             }
             // MainMap.CheckEvents();
 
-            //if (Keyboard.IsKeyPressed(Keyboard.Key.Down))
-            //{
-            //    MapRightSite.Move(new Vector2f(0, 1));
-            //}
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Down))
+            {
+                User.UserShip.Move(0.5f);
+                User.UserShip.Rotate(0);
+            }
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.Up))
             {
                 User.UserShip.Move(1);
+                User.UserShip.Rotate(0);
+
             }
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.Right))
@@ -98,13 +106,18 @@ namespace GameProject.Game
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.D))
             {
-                User.UserShip.Rotate(0.5f);                  
+                User.UserShip.Rotate(0.1f);                  
             }
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.A))
             {
-                User.UserShip.Rotate( -0.5f);
+                User.UserShip.Rotate( -0.1f);
             }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))
+            {
+                settings.SetActive("");
+            }
+
         }
 
 

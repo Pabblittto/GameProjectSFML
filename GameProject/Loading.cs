@@ -57,14 +57,14 @@ namespace GameProject
 
         public override void CheckEvents(MyWindow window)
         {
-            Back.Functionality();
+
         }
 
         public override void Render(MyWindow window)
         {
 
             window.Draw(BackGround);
-            Back.Draw(window);
+            window.Draw(Back);
 
 
             for (int i = 0; i < 5; i++)

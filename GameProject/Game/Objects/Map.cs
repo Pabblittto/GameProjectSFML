@@ -15,7 +15,7 @@ namespace GameProject.Game.Objects
     {       // it denfined how map is displayed and constructed
         private int[,] Matrix;
         private RectangleShape AllField;
-        public Vector2f ShipPosition;
+        public Vector2f ShipPosition;// bay be useless
         private RectangleShape[,] MapStructure;
         private Vector2f StandardTileSize;
         private Player User;
@@ -29,9 +29,6 @@ namespace GameProject.Game.Objects
 
 
         private List<RectangleShape> TilesOnScreen = new List<RectangleShape>();
-
-
-
 
 
         public Map(Player User_)
@@ -95,14 +92,14 @@ namespace GameProject.Game.Objects
 
 
 
-        public void RenderMap(int nr_columns, int nr_rows)
+         void RenderMap(int nr_columns, int nr_rows)
         {
 
             for (int i = 0; i < TilesOnScreen.Count; i++)
             {
                 MyWindow.window.Draw(TilesOnScreen[i]);
             }
-            //MyWindow.window.Draw(User.UserShip);
+          
 
         }
 

@@ -30,13 +30,11 @@ namespace GameProject
         public override void Render(MyWindow window)
         {
             window.Draw(BackSite);
-            Back.Draw(window);
+            window.Draw(Back);
         }
 
         public override void CheckEvents(MyWindow window)
         {
-            Back.Functionality();
-            //throw new NotImplementedException();
         }
 
 

@@ -20,10 +20,10 @@ namespace GameProject.Game.Objects
             name = _name;
             Hp = _hp;
             Class = _Class;
-
-            InfoToDisplay = new List<string>() { "Sailor", "", };
-                
+            InfoToDisplay = new List<string>() { "Sailor", "","Name: ",name,"Max HP: ",Hp.ToString()};
         }
            
+
+    
     }
 }

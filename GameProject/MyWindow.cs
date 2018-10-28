@@ -63,6 +63,11 @@ namespace GameProject
         }
 
 
+        public void CloseThis(string a)
+        {
+            this.Close();
+        }
+
 
     }
 }

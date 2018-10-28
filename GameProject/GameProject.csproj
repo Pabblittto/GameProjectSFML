@@ -68,6 +68,7 @@
     <Compile Include="Game\Objects\MyTile.cs" />
     <Compile Include="Game\Objects\Slot.cs" />
     <Compile Include="Game\Objects\Wind.cs" />
+    <Compile Include="Game\UsrInt\SettingsOnGame.cs" />
     <Compile Include="Game\UsrInt\ShipCrewContainer.cs" />
     <Compile Include="Game\View.cs" />
     <Compile Include="Game\Game.cs" />

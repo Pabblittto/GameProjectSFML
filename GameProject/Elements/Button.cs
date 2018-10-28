@@ -13,7 +13,7 @@ using GameProject.Game;
 
 namespace GameProject.Elements
 {
-    class Button
+    class Button:Drawable
     {
         Action PossibleMethod;// possible additional method to run before go to next frame
 
@@ -75,10 +75,15 @@ namespace GameProject.Elements
             }
         }
 
-        public void Draw(MyWindow window)
+
+
+
+
+        public void Draw(RenderTarget window,RenderStates States)
         {
             window.Draw(Shape);
             window.Draw(Content);
+            this.Functionality();
         }
 
         private void OnClick(Frame NextSet,MyWindow window)
@@ -102,6 +107,8 @@ namespace GameProject.Elements
                 }
             
         }
+
+
 
 
 

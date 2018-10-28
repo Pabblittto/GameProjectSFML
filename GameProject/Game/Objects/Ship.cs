@@ -11,6 +11,7 @@ using SFML.Window;
 
 namespace GameProject.Game.Objects
 {
+    [Serializable]
     class Ship : Drawable // obiect of ship, hsve all properties, 
     {
         public Vector2f PositionOnMap;
@@ -18,34 +19,37 @@ namespace GameProject.Game.Objects
         protected uint TrunkCapacity;// how many cargo ship can have
         protected uint CrewCapacity; // how many crew ship can contain
         protected uint CanoonNumber;// how many canoons ship can contain
-        protected RectangleShape shape;
-        protected Texture texture;
-        protected Texture SideShipRight;
-        protected Texture SideShipLeft;
-        Sprite tmp;
+        protected RectangleShape HitBox;
+        protected Texture NormalShip;
+        protected Texture SideShip;
+        Sprite shape;
+        IntRect RightSide;// way to render a texture of rotatated ship
+        IntRect LeftSide;
 
+        Boolean changed = false;
        
 
         public Ship(Vector2f SizeOfShip, uint CrewAmount, uint TrunkAmount, uint CanoonAmount,string TexturePath,string TexturePathSide, Vector2f positionOfShip,float Degree)
         {
-             tmp = new Sprite(new Texture(TexturePathSide), new IntRect(new Vector2i(0, 0), (Vector2i)SizeOfShip));//
-            //SideShipRight = tmp.Texture;
-            tmp = new Sprite(new Texture(TexturePathSide),new IntRect(0, (int)SizeOfShip.Y, (int)SizeOfShip.X, -(int)SizeOfShip.Y));
-            SideShipLeft =new Texture( tmp.Texture );
+            RightSide = new IntRect((int)SizeOfShip.X,0,  -(int)SizeOfShip.X, (int)SizeOfShip.Y);
+            LeftSide = new IntRect(new Vector2i(0, 0), (Vector2i)SizeOfShip);
 
-            SideShipRight = new Texture(TexturePathSide, new IntRect(new Vector2i(0, 0), (Vector2i)SizeOfShip));
-          //  SideShipLeft = new Texture(TexturePathSide, new IntRect(0, (int)SizeOfShip.Y, (int)SizeOfShip.X, -(int)SizeOfShip.Y));
-            //TRZEBA ZMIENIC obiekt który jest wyswietlany na spraita !!!!!!!!!!!!!!!!!!!!
-
-            texture = new Texture(TexturePath);
-
-
-            shape = new RectangleShape(SizeOfShip)
+            NormalShip = new Texture(TexturePath);
+            SideShip = new Texture(TexturePathSide);
+            
+            shape = new Sprite()
             {
-                Texture = texture,
+                Texture = NormalShip,
                 Origin = new Vector2f(SizeOfShip.X / 2, SizeOfShip.Y / 2),
                 Position = PositionOnMap,
                 Rotation = Degree,
+            };
+
+            HitBox = new RectangleShape(SizeOfShip)
+            {
+                Origin = shape.Origin,
+                Position = shape.Position,
+                Rotation=shape.Rotation
             };
             PositionOnMap = positionOfShip;
             DegreeOfShip = Degree;
@@ -66,27 +70,42 @@ namespace GameProject.Game.Objects
         { 
             shape.Position = PositionOnMap;
             shape.Rotation = DegreeOfShip;
+
+            HitBox.Rotation = shape.Rotation;
+            HitBox.Position = shape.Position;
         }
 
         public void Rotate(float value)
         {
             if(value<0)
             {
-                shape.Texture = SideShipLeft;
-                Console.WriteLine("zmiana na left");
+                shape.Texture = SideShip;
                 if(DegreeOfShip == 0)
                 DegreeOfShip = 360;
             }
 
             if(value>=0)
             {
-                Console.WriteLine("Zmiana na right");
-            
                 if (DegreeOfShip == 360)
                 DegreeOfShip = 0;
             }
-
             DegreeOfShip += value;
+
+                if (value != 0)
+                {
+                    shape.Texture = SideShip;
+
+                    if (value > 0)
+                        shape.TextureRect = RightSide;
+
+                    if (value < 0)
+                        shape.TextureRect = LeftSide;
+                }
+                else// value==0
+                {
+                    shape.TextureRect = LeftSide;
+                    shape.Texture = NormalShip;
+                }
         }
 
 
@@ -95,12 +114,16 @@ namespace GameProject.Game.Objects
         /// <summary>
         /// Ship will move only straight, where its beak facing
         /// </summary>
-        public void Move(int value)
+        public void Move(float value)
         {
-            double angle = Math.PI*((double)DegreeOfShip-90)/180.0;
-            float Cos = (float)Math.Cos(angle) * value;
-            float sin = (float)Math.Sin(angle) * value;
-            PositionOnMap += new Vector2f(Cos,sin);
+            if (value != 0)
+            {
+                double angle = Math.PI * ((double)DegreeOfShip - 90) / 180.0;
+                float Cos = (float)Math.Cos(angle) * value;
+                float sin = (float)Math.Sin(angle) * value;
+                PositionOnMap += new Vector2f(Cos, sin);
+            }
+
         }
 
 
@@ -111,7 +134,7 @@ namespace GameProject.Game.Objects
         public void Draw(RenderTarget window, RenderStates states)
         {
             window.Draw(shape);
-            window.Draw(tmp);
+          //  window.Draw(tmp);
         }
 
 

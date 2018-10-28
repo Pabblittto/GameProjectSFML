@@ -52,8 +52,9 @@ namespace GameProject.Game
         {
             Focus = true;
             window.Draw(Background);
-            ok.Draw(window);
-            back.Draw(window);
+            window.Draw(ok);
+            window.Draw(back);
+
             window.Draw(Info);
             NameInput.Draw();
             
@@ -61,8 +62,6 @@ namespace GameProject.Game
 
         public override void CheckEvents(MyWindow window)
         {
-            ok.Functionality();
-            back.Functionality();
             NameInput.CheckEvents();
         }
 
