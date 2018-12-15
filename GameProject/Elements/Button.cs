@@ -3,58 +3,85 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
-using SFML.Audio;
-using System.Threading;
-using GameProject.Game;
-
+using SFML.Graphics;
 
 namespace GameProject.Elements
 {
-    class Button:Drawable
+    class Button: Drawable
     {
-        Action PossibleMethod;// possible additional method to run before go to next frame
+        public delegate void FunctionToDo();
+        private FunctionToDo Adding;// functions wchich can be casted after click
 
-        public Player FutureUser;// if it is set, button set this player for game. its used for creating new players and seting existing ones
+        public Action<string> FunctionString;// function with string
+        private string StringForFunct;
 
-        public Frame DestinationSet;// public for fast access
-        Boolean focus = false;// bool for protecting PCU against usless color setting in WhenHover(its infinite loop)
-        MyWindow WindowPoint;
+        public FunctionToDo Main;// inaccording to selected mode main will contain different functions
+
+        Boolean focus = false;
         Text Content;
-        Color OnHoverColor,NormalColor;
-        RectangleShape Shape;
-        
+        public RectangleShape Shape;
+        Color OnHoverColor, NormalColor;
+        Frame DestinationSet;// public for fast access, possible Destination if needed
 
-        public Button(Vector2f Size, Vector2f position ,Color color, Color OnHover, string display, Font UsedFont,MyWindow window, Frame Destination)
+        int Mode; // mode specifies how the button works, it can warp to another Frame,, or it can run som functions only
+
+        public Player FutureUser; // pool for setting players for game
+
+
+        public Button(Vector2f position, Vector2f size, Color Background, Color OnHover, Font UsedFont, string ToDisplay, uint CharacterSize,Frame Dest,int Mode_)
         {
-            NormalColor = color;
+            DestinationSet = Dest;
             OnHoverColor = OnHover;
+            NormalColor = Background;
 
-            WindowPoint = window;
-
-            DestinationSet = Destination;
-
-            Shape = new RectangleShape(Size)
+            Shape = new RectangleShape(size)
             {
                 Position = position,
-                FillColor = color,
+                FillColor = Background,
                 OutlineThickness = 3,
                 OutlineColor = Color.Black
             };
 
-            Content = new Text(display, UsedFont, 30)
+            Content = new Text(ToDisplay, UsedFont, CharacterSize)
             {
                 Color = Color.Black,
-                Position = new Vector2f(Shape.Position.X + 5, Shape.Position.Y + 10)
+                Position = new Vector2f(Shape.Position.X + 5, Shape.Position.Y + 5)
             };
+
+            Mode = Mode_;
+            switch (Mode)
+            {
+                case 1: // this mode changes frame 
+                    {
+                        Main = ModeOne;
+
+                        break;
+                    }
+                case 2: // this is for casting other functions
+                    {
+                        //Main = Adding;
+                        break;
+                    }
+                case 3: // this is for functions with extra string needed
+                    {
+                       // Main = ModeThree;
+                        break;
+                    }
+                default:
+                    {
+                        throw new Exception();// jakiś nieobsługiwany mode
+                        break;
+                    }
+            }
 
         }
 
+
         private void WhenHover()
         {
-            if (Functions.CheckIfMouseHover(Shape.Size, Shape.Position, WindowPoint))
+            if (Functions.CheckIfMouseHover(Shape.Size, Shape.Position,MyWindow.window))
             {
                 if (focus == false)
                 {
@@ -75,71 +102,89 @@ namespace GameProject.Elements
             }
         }
 
-
-
-
-
-        public void Draw(RenderTarget window,RenderStates States)
+        private void ModeOne()
         {
-            window.Draw(Shape);
-            window.Draw(Content);
-            this.Functionality();
+            if (Mode == 1)
+            {
+                MyWindow.window.RenderSomeElements = DestinationSet.Render;
+                MyWindow.window.CheckSomeEents = DestinationSet.CheckEvents;
+            }
+            else
+                throw new Exception();// this shoul never happend
+
         }
 
-        private void OnClick(Frame NextSet,MyWindow window)
+        private void ModeTwo() // this will be uselless, probably
         {
-
-                if (Functions.CheckIfMouseHover(Shape.Size, Shape.Position, WindowPoint) && Mouse.IsButtonPressed(Mouse.Button.Left))
-                {
-                    if (PossibleMethod != null)
-                    {
-                        PossibleMethod.Invoke();
-                    }
-
-                    if (FutureUser != null)
-                    {
-                        MyWindow.game.SetPlayer(FutureUser);
-                    }
-
-                    window.RenderSomeElements = NextSet.Render;
-                    window.CheckSomeEents = NextSet.CheckEvents;
-                    
-                }
-            
         }
 
 
 
-
-
-        public void Functionality()// all Possible eventsw with this button
+        private void OnClick()
         {
-            this.WhenHover();
-            this.OnClick(DestinationSet, WindowPoint);
-            // function when click
+            if (Functions.CheckIfMouseHover(Shape.Size, Shape.Position, MyWindow.window) && Mouse.IsButtonPressed(Mouse.Button.Left) && MyWindow.MouseButtonWasPressed == false)
+            {
+                if (Adding!=null)
+                Adding.Invoke();
+                if (StringForFunct!= null)
+                    FunctionString.Invoke(StringForFunct);
+                if(Main!=null)
+                Main.Invoke();
+
+                if (FutureUser!=null)
+                    MyWindow.game.SetPlayer(ref FutureUser);
+
+            }
+
         }
+
 
         /// <summary>
-        /// method to move content to the center of button, unfortynaly one have to do manually :/
+        /// method to move text manually
         /// </summary>
         /// <param name="xToRight"></param>
-        public void MoveText(float xToRight)
+        public void MoveText(float xToRight, float yToDown)
         {
-            Content.Position = new Vector2f(Content.Position.X + xToRight, Content.Position.Y);
+            Content.Position = new Vector2f(Content.Position.X + xToRight, Content.Position.Y+ yToDown);
+        }
+
+
+        /// <summary>
+        /// function wchich centers text on button
+        /// </summary>
+        public void Center()
+        {
+            Content.Position= new Vector2f(Content.Position.X +Shape.Size.X/2-Content.GetLocalBounds().Width/2 , Content.Position.Y);
+        }
+
+        public void AddingAdditionalFunction(FunctionToDo function)
+        {
+            Adding += function;
+        }
+
+        public void SetStringFunction(Action<string> function,string neededString)
+        {
+            FunctionString = function;
+            StringForFunct = neededString;
         }
 
         /// <summary>
-        /// Additional method for creating player object and creating game object- only for NewPlayerFrame
+        /// this one set one functions to do on click and remove old ones
         /// </summary>
-        public void AddingAdditionalFunction(Action function)
+        /// <param name="function"></param>
+        public void SetOneFunction(FunctionToDo function)
         {
-            PossibleMethod += function;
+            Adding = function;
         }
 
+        public void Draw(RenderTarget window, RenderStates states)
+        {
+            this.WhenHover();
+            this.OnClick();
+            window.Draw(Shape);
+            window.Draw(Content);
 
-
-
-
+        }
 
     }
 }

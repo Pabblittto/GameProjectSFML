@@ -13,8 +13,10 @@ namespace GameProject.Elements
     class PossibleSave :Drawable // this element will be needed in loading frame- it respersents one saved world there will be 5 in total
     {
         RectangleShape MainContainer;
-        Button2 Delete;
-        Button2 Play;
+
+        Button Delete;
+        Button Play;
+
         Boolean FoundSave = false;
         
 
@@ -35,8 +37,13 @@ namespace GameProject.Elements
                 Position = new Vector2f(900, row_nr * 150)
             };
 
-            Delete = new Button2(new Vector2f(MainContainer.Position.X + 100, MainContainer.Position.Y-20), new Vector2f(130,50), new Color(0, 250, 255), new Color(0, 152, 155),MyWindow.MyFont,"Delete",30);
-            Play = new Button2(new Vector2f(Delete.Shape.Position.X + 150, Delete.Shape.Position.Y), new Vector2f(130, 50), new Color(0, 250, 255), new Color(0, 152, 155), MyWindow.MyFont, "Play", 30);
+
+            Delete = new Button(new Vector2f(MainContainer.Position.X + 100, MainContainer.Position.Y - 20), new Vector2f(130, 50), new Color(0, 250, 255), new Color(0, 152, 155), MyWindow.MyFont, "Delete", 30, null, 2);
+
+            //Delete = new Button2(new Vector2f(MainContainer.Position.X + 100, MainContainer.Position.Y-20), new Vector2f(130,50), new Color(0, 250, 255), new Color(0, 152, 155),MyWindow.MyFont,"Delete",30);
+            Play = new Button(new Vector2f(Delete.Shape.Position.X + 150, Delete.Shape.Position.Y), new Vector2f(130, 50), new Color(0, 250, 255), new Color(0, 152, 155), MyWindow.MyFont, "Play", 30, null, 2);
+
+            //Play = new Button2(new Vector2f(Delete.Shape.Position.X + 150, Delete.Shape.Position.Y), new Vector2f(130, 50), new Color(0, 250, 255), new Color(0, 152, 155), MyWindow.MyFont, "Play", 30);
         }
 
         public void Update(string name)
@@ -49,8 +56,8 @@ namespace GameProject.Elements
                 PlayerName = PlayerName.Remove(PlayerName.Count() - 5,5);
 
 
-                Delete.setFunction(this.DeleteFunc, PlayerName);
-                Play.setFunction(this.PlayFunc, "");
+                Delete.SetStringFunction(this.DeleteFunc, PlayerName);
+                Play.SetStringFunction(this.PlayFunc, "");
 
                 NameOfPlayer = new Text(PlayerName, MyWindow.MyFont, 50)
                 {

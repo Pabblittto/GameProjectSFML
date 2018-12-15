@@ -41,7 +41,7 @@ namespace GameProject.Game
         }
 
 
-        public void SetPlayer(Player userObj)//really important method- game need Player obiect, almost work like constructor
+        public void SetPlayer( ref Player userObj)//really important method- game need Player obiect, almost work like constructor
         {
             User = userObj;
             UserInterface = new UserInterface(User);

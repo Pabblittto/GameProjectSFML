@@ -23,6 +23,7 @@ namespace GameProject.Game
 
         public NewPlayer(Menu menu)
         {
+            
             NameInput = new TextInput(new Vector2f(450, 50), new Vector2f(665, 70), Color.Black);
 
             Info = new Text("Whats youry name Capitan?", MyWindow.MyFont, 40)
@@ -31,10 +32,12 @@ namespace GameProject.Game
                 Color = Color.Black
             };
 
-            ok = new Button(new Vector2f(250, 50), new Vector2f(925, 130), new Color(0, 250, 255), new Color(0, 152, 155), "Adventure!", MyWindow.MyFont, MyWindow.window, MyWindow.game);// in null place one have to place pointer to player obiect
-            back = new Button(new Vector2f(250, 50), new Vector2f(625, 130), new Color(0, 250, 255), new Color(0, 152, 155), "Back", MyWindow.MyFont, MyWindow.window,menu);
-            ok.MoveText(50);
-            back.MoveText(75);
+            ok = new Button(new Vector2f(925, 130), new Vector2f(250, 50), new Color(0, 250, 255), new Color(0, 152, 155), MyWindow.MyFont, "Adventure!", 30, MyWindow.game,1);
+            //  ok = new Button(new Vector2f(250, 50), new Vector2f(925, 130), new Color(0, 250, 255), new Color(0, 152, 155), "Adventure!", MyWindow.MyFont, MyWindow.window, MyWindow.game);// in null place one have to place pointer to player obiect
+            back = new Button(new Vector2f(625, 130), new Vector2f(250, 50), new Color(0, 250, 255), new Color(0, 152, 155), MyWindow.MyFont, "Back", 30, menu,1);
+            //back = new Button(new Vector2f(250, 50), new Vector2f(625, 130), new Color(0, 250, 255), new Color(0, 152, 155), "Back", MyWindow.MyFont, MyWindow.window,menu);
+            ok.Center();
+            back.Center();
 
             back.AddingAdditionalFunction(FocusChanged);
             ok.AddingAdditionalFunction(FocusChanged);
@@ -70,7 +73,6 @@ namespace GameProject.Game
         {
             NameInput.Clear();
             Focus = false;
-            Console.WriteLine("focus changed"+ Focus);
         }
 
         // function for creating player object after clicking

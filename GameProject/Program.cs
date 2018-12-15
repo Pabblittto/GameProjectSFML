@@ -35,7 +35,7 @@ namespace GameProject
                 window.RenderSomeElements.Invoke(window);
                 window.CheckSomeEents.Invoke(window);
 
-
+                MyWindow.CheckMouseLeftButton();
                 window.Display();
             }
         }// Main
