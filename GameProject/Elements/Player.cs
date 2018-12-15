@@ -29,7 +29,7 @@ namespace GameProject.Elements
 
 
 
-        public void Save(string a)
+        public void Save()
         {
             FileStream file = new FileStream("Res/Sav/"+name +"G.sav", FileMode.Create,FileAccess.Write,FileShare.None);
             BinaryFormatter formatter = new BinaryFormatter();

@@ -56,13 +56,13 @@
   <ItemGroup>
     <Compile Include="Elements\AdminSave.cs" />
     <Compile Include="Elements\Button.cs" />
-    <Compile Include="Elements\Button2.cs" />
     <Compile Include="Elements\Functions.cs" />
     <Compile Include="Elements\PossibleSave.cs" />
     <Compile Include="Elements\TextInput.cs" />
     <Compile Include="Exit.cs" />
     <Compile Include="Frame.cs" />
     <Compile Include="Elements\Player.cs" />
+    <Compile Include="Game\ObjectsBank.cs" />
     <Compile Include="Game\Objects\CardSlot.cs" />
     <Compile Include="Game\Objects\Map.cs" />
     <Compile Include="Game\Objects\MyTile.cs" />
