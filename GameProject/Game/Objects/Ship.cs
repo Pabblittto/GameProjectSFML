@@ -26,7 +26,8 @@ namespace GameProject.Game.Objects
         IntRect RightSide;// way to render a texture of rotatated ship
         IntRect LeftSide;
 
-        Boolean changed = false;
+        Boolean changed = false;// i dont have idea what it is for
+
        
 
         public Ship(Vector2f SizeOfShip, uint CrewAmount, uint TrunkAmount, uint CanoonAmount,string TexturePath,string TexturePathSide, Vector2f positionOfShip,float Degree)
@@ -53,8 +54,6 @@ namespace GameProject.Game.Objects
             };
             PositionOnMap = positionOfShip;
             DegreeOfShip = Degree;
-
-
 
         }
 
@@ -118,7 +117,7 @@ namespace GameProject.Game.Objects
         {
             if (value != 0)
             {
-                double angle = Math.PI * ((double)DegreeOfShip - 90) / 180.0;
+                double angle = Math.PI * ((double)DegreeOfShip -90) / 180.0;
                 float Cos = (float)Math.Cos(angle) * value;
                 float sin = (float)Math.Sin(angle) * value;
                 PositionOnMap += new Vector2f(Cos, sin);

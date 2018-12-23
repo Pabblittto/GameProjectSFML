@@ -160,10 +160,22 @@ namespace GameProject.Elements
                 return rect2.SpeedPunish;
             else
                 return 0;
-         
-            
         }
 
+        public static Vector2f RotateVector(Vector2f vector, float degrees)
+        {
+            Vector2f result = new Vector2f();
+           
+            double Ddegrees = Math.PI * ((double)degrees) / 180.0;
+            result.X = vector.X * (float)Math.Cos(Ddegrees) - vector.Y * (float)Math.Sin(Ddegrees);
+            result.Y = vector.X * (float)Math.Sin(Ddegrees) + vector.Y * (float)Math.Cos(Ddegrees);
+            return result;
+        }
+
+        public static Vector2f CenterOfRectangle(RectangleShape shape)
+        {
+            return new Vector2f(shape.Size.X / 2, shape.Size.Y / 2);
+        }
 
     }
 }

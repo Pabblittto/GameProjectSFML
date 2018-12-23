@@ -25,7 +25,7 @@ namespace GameProject.Game
         Map MyMap;
         SettingsOnGame settings;
         RectangleShape CollisionRectangle;//this one represents ship rectangle
-
+        Wind WindRose;
 
         public GameObj()
         {
@@ -35,6 +35,7 @@ namespace GameProject.Game
             MapRightSite = new SFML.Graphics.View(new FloatRect(0,0,1000,900));
             MapRightSite.Viewport = new FloatRect(8 / 18f, 0, 10 / 18f, 1f);
             
+
 
         }
 
@@ -54,7 +55,7 @@ namespace GameProject.Game
                 Origin = User.UserShip.shape.Origin/2
             };
 
-
+            WindRose = new Wind(new Vector2f(1710,80));
 
             ObjectsBank.ColisionThread = new System.Threading.Thread(CheckColision);
             ObjectsBank.ColisionThread.Start();// ten start moze byc w move a while w środku zmienionu na while wokłó jest jakiś lad, mielizna
@@ -74,6 +75,10 @@ namespace GameProject.Game
             MyMap.TilesToCheckColision(MapRightSite);
 
             MyMap.Render();
+
+
+
+
             if (User != null)
             {
                 User.UserShip.UpdateView(MapRightSite);
@@ -82,7 +87,10 @@ namespace GameProject.Game
             }
             window.SetView(window.DefaultView);
             window.Draw(settings);
-            
+
+            WindRose.Update(-1*MapRightSite.Rotation);
+            window.Draw(WindRose);
+
 
         }
 
@@ -94,7 +102,7 @@ namespace GameProject.Game
                 foreach (MyTile item in MyMap.TilesToColision)
                 {
                     ObjectsBank.PunishtoSpeed=Functions.CheckColision(CollisionRectangle,item);
-                    Console.WriteLine("Punish speed:"+ ObjectsBank.PunishtoSpeed);
+                   // Console.WriteLine("Punish speed:"+ ObjectsBank.PunishtoSpeed);
                 }
             }
         }
@@ -102,7 +110,6 @@ namespace GameProject.Game
         
         public override void CheckEvents(MyWindow window)// prawdopodobnie to jest nie potrzebne
         {
-            
 
             if (User == null)
             {
@@ -163,6 +170,28 @@ namespace GameProject.Game
             {
                 Console.Clear();
             }
+
+            if (Keyboard.IsKeyPressed(Keyboard.Key.H))
+            {
+                WindRose.VectorOfWind = Functions.RotateVector(WindRose.VectorOfWind, -1);
+
+            }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.K))
+            {
+                WindRose.VectorOfWind = Functions.RotateVector(WindRose.VectorOfWind, 1);
+            }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.U))
+            {
+                WindRose.AddToValue(0.3f);
+            }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.J))
+            {
+                WindRose.AddToValue(-0.3f);
+
+            }
+
+
+
 
         }
 

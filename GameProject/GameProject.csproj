@@ -57,6 +57,7 @@
     <Compile Include="Elements\AdminSave.cs" />
     <Compile Include="Elements\Button.cs" />
     <Compile Include="Elements\Functions.cs" />
+    <Compile Include="Elements\Physics.cs" />
     <Compile Include="Elements\PossibleSave.cs" />
     <Compile Include="Elements\TextInput.cs" />
     <Compile Include="Exit.cs" />

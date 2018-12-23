@@ -40,6 +40,7 @@ namespace GameProject
         private void Onclose(object sender, EventArgs e)//need to add warning and save window
         {
             MyWindow window = (MyWindow)sender;
+            ObjectsBank.ColisionThread.Abort();
             window.Close();
         }
 

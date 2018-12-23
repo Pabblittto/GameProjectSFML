@@ -54,7 +54,7 @@ namespace GameProject.Game.Objects
             MaxY = (uint)nr_rows * 80;
             MapStructure = new MyTile[nr_rows, nr_columns];
 
-            //ShipPosition = User.UserShip.PositionOnMap;
+            ShipPosition = User.UserShip.PositionOnMap;
             this.LoadTextures();
 
             CreateMapStructre(nr_columns, nr_rows, Matrix, MapStructure);

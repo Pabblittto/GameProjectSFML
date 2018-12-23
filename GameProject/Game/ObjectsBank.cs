@@ -18,6 +18,7 @@ namespace GameProject.Game
 
         public static Texture WindRose;
         public static Texture WindArrow;
+        public static Texture LettersToCompas;
 
         public static Texture land;
         public static Texture shallow;
@@ -58,6 +59,7 @@ namespace GameProject.Game
             water = new Texture("Res/Map/water.bmp");
             error = new Texture("Res/Map/error.bmp");
             shallow = new Texture("Res/Map/shallow.bmp");
+            LettersToCompas= new Texture("Res/Map/letters.png");
 
         }
     }
