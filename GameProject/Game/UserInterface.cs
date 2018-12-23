@@ -60,8 +60,8 @@ namespace GameProject.Game
 
         public void Render()
         {
-  
-            MyWindow.window.Draw(AllField);
+
+            ObjectsBank.window.Draw(AllField);
 
             //MyWindow.window.Draw(CargoSlot1);
             //MyWindow.window.Draw(CargoSlot2);
@@ -69,11 +69,11 @@ namespace GameProject.Game
             //MyWindow.window.Draw(test1);
             //MyWindow.window.Draw(cannontest);
 
-            MyWindow.window.Draw(CrewContainer);
+            ObjectsBank.window.Draw(CrewContainer);
 
-            if(MyWindow.MouseIsDragging==true && MyWindow.DraggedCard != null)// this if makes draged card more visible
+            if(ObjectsBank.MouseIsDragging==true && ObjectsBank.DraggedCard != null)// this if makes draged card more visible
             {
-               MyWindow.window.Draw(MyWindow.DraggedCard);
+                ObjectsBank.window.Draw(ObjectsBank.DraggedCard);
             }
 
         }

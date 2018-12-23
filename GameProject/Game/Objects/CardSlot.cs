@@ -54,7 +54,7 @@ namespace GameProject.Game.Objects
          public void Draw(RenderTarget window, RenderStates states)
         {
             window.Draw(shape);
-            Functions.DropOnSlot(MyWindow.DraggedCard, this);
+            Functions.DropOnSlot(ObjectsBank.DraggedCard, this);
             
         }
 
@@ -74,14 +74,14 @@ namespace GameProject.Game.Objects
 
         public void OnHover()// maybe need to use somewhere
         {
-            if (Functions.CheckIfMouseHover(shape.Size, shape.Position, MyWindow.window) && hovered == false)// this function run only once, when mouse is hovered on item
+            if (Functions.CheckIfMouseHover(shape.Size, shape.Position, ObjectsBank.window) && hovered == false)// this function run only once, when mouse is hovered on item
             {
                 hovered = true;
                 shape.FillColor = new Color(173, 173, 173);
 
             }
 
-            if (!Functions.CheckIfMouseHover(shape.Size, shape.Position, MyWindow.window) && hovered == true)// this function run only once, when mouse is hovered out item
+            if (!Functions.CheckIfMouseHover(shape.Size, shape.Position, ObjectsBank.window) && hovered == true)// this function run only once, when mouse is hovered out item
             {
                 hovered = false;
                 shape.FillColor = Color.White;

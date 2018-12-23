@@ -12,7 +12,7 @@ namespace GameProject.Game.Objects
 {
     abstract class Card : Drawable// All items will be presented by "cards"
     {
-        Text Info = new Text("",MyWindow.MyFont,20);
+        Text Info = new Text("", ObjectsBank.MyFont,20);
 
         Vector2f Position;// this position is permanent, set only in cardSlots
         Boolean DisplayInfo = false;
@@ -71,17 +71,17 @@ namespace GameProject.Game.Objects
         /// </summary>
         public void DrawInfoBox()
         {
-            if (DisplayInfo==true && Dragging==false && MyWindow.MouseIsDragging==false) {
+            if (DisplayInfo==true && Dragging==false && ObjectsBank.MouseIsDragging==false) {
                 if (InfoShape.Size == new Vector2f(0, 0))
                 {
                     InfoShape.Size = new Vector2f(Info.GetLocalBounds().Width + 10, Info.GetLocalBounds().Height + 10);// added 5 pixel padding
                 }
-                InfoShape.Position = new Vector2f(Mouse.GetPosition(MyWindow.window).X + 10, Mouse.GetPosition(MyWindow.window).Y + 10);// setting info rectangle position in the center of card
+                InfoShape.Position = new Vector2f(Mouse.GetPosition(ObjectsBank.window).X + 10, Mouse.GetPosition(ObjectsBank.window).Y + 10);// setting info rectangle position in the center of card
                 Info.Position = new Vector2f(InfoShape.Position.X + 5, InfoShape.Position.Y + 5);
 
 
-                MyWindow.window.Draw(InfoShape);
-                MyWindow.window.Draw(Info);
+                ObjectsBank.window.Draw(InfoShape);
+                ObjectsBank.window.Draw(Info);
             }
 
         }
@@ -103,14 +103,14 @@ namespace GameProject.Game.Objects
 
         private void OnHover()// this is activated while displayng
         {
-               if( Functions.CheckIfMouseHover(shape.Size,shape.Position,MyWindow.window) && hovered==false)// this function run only once, when mouse is hovered on item
+               if( Functions.CheckIfMouseHover(shape.Size,shape.Position, ObjectsBank.window) && hovered==false)// this function run only once, when mouse is hovered on item
             {
                 hovered = true;
                 shape.FillColor = new Color(173, 173, 173);
 
             }
 
-            if (!Functions.CheckIfMouseHover(shape.Size, shape.Position, MyWindow.window) && hovered == true)// this function run only once, when mouse is hovered out item
+            if (!Functions.CheckIfMouseHover(shape.Size, shape.Position, ObjectsBank.window) && hovered == true)// this function run only once, when mouse is hovered out item
             {
                 DisplayInfo = false;
                 hovered = false;
@@ -138,20 +138,20 @@ namespace GameProject.Game.Objects
         {
             
             
-                if ((hovered == true && Mouse.IsButtonPressed(Mouse.Button.Left) && MyWindow.MouseIsDragging==false) || Dragging == true)
+                if ((hovered == true && Mouse.IsButtonPressed(Mouse.Button.Left) && ObjectsBank.MouseIsDragging==false) || Dragging == true)
                 {
-                    MyWindow.MouseIsDragging = true;
-                    MyWindow.DraggedCard = this;
+                    ObjectsBank.MouseIsDragging = true;
+                    ObjectsBank.DraggedCard = this;
                     Dragging = true;
-                    shape.Position = (Vector2f)Mouse.GetPosition(MyWindow.window) - shape.Size / 2;
+                    shape.Position = (Vector2f)Mouse.GetPosition(ObjectsBank.window) - shape.Size / 2;
 
                 }
 
                 if (!Mouse.IsButtonPressed(Mouse.Button.Left) && Dragging == true)
                 {
-                   
-                    MyWindow.MouseIsDragging = false;
-                    MyWindow.DraggedCard = null;
+
+                    ObjectsBank.MouseIsDragging = false;
+                    ObjectsBank.DraggedCard = null;
                     Dragging = false;
                     shape.Position = Position;
                 }

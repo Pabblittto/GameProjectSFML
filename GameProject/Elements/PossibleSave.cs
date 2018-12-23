@@ -6,6 +6,7 @@ using SFML.System;
 using SFML.Window;
 using SFML.Graphics;
 using GameProject.Elements;
+using GameProject.Game;
 using System.IO;
 
 namespace GameProject.Elements
@@ -38,10 +39,10 @@ namespace GameProject.Elements
             };
 
 
-            Delete = new Button(new Vector2f(MainContainer.Position.X + 100, MainContainer.Position.Y - 20), new Vector2f(130, 50), new Color(0, 250, 255), new Color(0, 152, 155), MyWindow.MyFont, "Delete", 30, null, 2);
+            Delete = new Button(new Vector2f(MainContainer.Position.X + 100, MainContainer.Position.Y - 20), new Vector2f(130, 50), new Color(0, 250, 255), new Color(0, 152, 155), ObjectsBank.MyFont, "Delete", 30, null, 2);
 
             //Delete = new Button2(new Vector2f(MainContainer.Position.X + 100, MainContainer.Position.Y-20), new Vector2f(130,50), new Color(0, 250, 255), new Color(0, 152, 155),MyWindow.MyFont,"Delete",30);
-            Play = new Button(new Vector2f(Delete.Shape.Position.X + 150, Delete.Shape.Position.Y), new Vector2f(130, 50), new Color(0, 250, 255), new Color(0, 152, 155), MyWindow.MyFont, "Play", 30, null, 2);
+            Play = new Button(new Vector2f(Delete.Shape.Position.X + 150, Delete.Shape.Position.Y), new Vector2f(130, 50), new Color(0, 250, 255), new Color(0, 152, 155), ObjectsBank.MyFont, "Play", 30, null, 2);
 
             //Play = new Button2(new Vector2f(Delete.Shape.Position.X + 150, Delete.Shape.Position.Y), new Vector2f(130, 50), new Color(0, 250, 255), new Color(0, 152, 155), MyWindow.MyFont, "Play", 30);
         }
@@ -59,7 +60,7 @@ namespace GameProject.Elements
                 Delete.SetStringFunction(this.DeleteFunc, PlayerName);
                 Play.SetStringFunction(this.PlayFunc, "");
 
-                NameOfPlayer = new Text(PlayerName, MyWindow.MyFont, 50)
+                NameOfPlayer = new Text(PlayerName, ObjectsBank.MyFont, 50)
                 {
                     Color = Color.Black,
                     Origin = new Vector2f(0, 25),
@@ -69,7 +70,7 @@ namespace GameProject.Elements
             else
             {
                 FoundSave = false;
-                NameOfPlayer = new Text("Free slot", MyWindow.MyFont, 70)
+                NameOfPlayer = new Text("Free slot", ObjectsBank.MyFont, 70)
                 {
                     Color = Color.Black,
                     Origin = new Vector2f(0, 35),

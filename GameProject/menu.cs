@@ -36,16 +36,10 @@ namespace GameProject
                 loading = new Loading(BackSite, this);
 
 
-            NewGame = new Button(new Vector2f(20, 20), new Vector2f(250, 50), new Color(0, 250, 255), new Color(0, 152, 155), MyWindow.MyFont, "New Game", 30, newPlayer, 1);
-            Load = new Button(new Vector2f(20, 90), new Vector2f(250, 50), new Color(0, 250, 255), new Color(0, 152, 155), MyWindow.MyFont, "Load", 30, loading, 1);
-            Options = new Button(new Vector2f(20, 160), new Vector2f(250, 50), new Color(0, 250, 255), new Color(0, 152, 155), MyWindow.MyFont, "Settings", 30, settings, 1);
-            Exit = new Button(new Vector2f(20, 230), new Vector2f(250, 50), new Color(0, 250, 255), new Color(0, 152, 155), MyWindow.MyFont, "Exit", 30, exit, 1);
-
-
-               // NewGame = new Button(new Vector2f(250, 50), new Vector2f(20, 20), new Color(0, 250, 255), new Color(0, 152, 155), "New Game", MyWindow.MyFont,window,newPlayer);
-              //  Load = new Button(new Vector2f(250, 50), new Vector2f(20, 90), new Color(0, 250, 255), new Color(0, 152, 155), "Load", MyWindow.MyFont,window,loading);
-              //  Options = new Button(new Vector2f(250, 50), new Vector2f(20, 160), new Color(0, 250, 255), new Color(0, 152, 155), "Settings", MyWindow.MyFont,window,settings);
-              //  Exit = new Button(new Vector2f(250, 50), new Vector2f(20, 230), new Color(0, 250, 255), new Color(0, 152, 155), "Exit", MyWindow.MyFont,window,exit);
+            NewGame = new Button(new Vector2f(20, 20), new Vector2f(250, 50), new Color(0, 250, 255), new Color(0, 152, 155), ObjectsBank.MyFont, "New Game", 30, newPlayer, 1);
+            Load = new Button(new Vector2f(20, 90), new Vector2f(250, 50), new Color(0, 250, 255), new Color(0, 152, 155), ObjectsBank.MyFont, "Load", 30, loading, 1);
+            Options = new Button(new Vector2f(20, 160), new Vector2f(250, 50), new Color(0, 250, 255), new Color(0, 152, 155), ObjectsBank.MyFont, "Settings", 30, settings, 1);
+            Exit = new Button(new Vector2f(20, 230), new Vector2f(250, 50), new Color(0, 250, 255), new Color(0, 152, 155), ObjectsBank.MyFont, "Exit", 30, exit, 1);
 
             Load.AddingAdditionalFunction(loading.CheckFiles);// this always will check if thetre is a save
             

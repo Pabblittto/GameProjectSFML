@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SFML.System;
 using SFML.Window;
 using SFML.Graphics;
+using GameProject.Game;
 
 namespace GameProject.Elements
 {
@@ -81,7 +82,7 @@ namespace GameProject.Elements
 
         private void WhenHover()
         {
-            if (Functions.CheckIfMouseHover(Shape.Size, Shape.Position,MyWindow.window))
+            if (Functions.CheckIfMouseHover(Shape.Size, Shape.Position, ObjectsBank.window))
             {
                 if (focus == false)
                 {
@@ -106,8 +107,8 @@ namespace GameProject.Elements
         {
             if (Mode == 1)
             {
-                MyWindow.window.RenderSomeElements = DestinationSet.Render;
-                MyWindow.window.CheckSomeEents = DestinationSet.CheckEvents;
+                ObjectsBank.window.RenderSomeElements = DestinationSet.Render;
+                ObjectsBank.window.CheckSomeEents = DestinationSet.CheckEvents;
             }
             else
                 throw new Exception();// this shoul never happend
@@ -122,7 +123,7 @@ namespace GameProject.Elements
 
         private void OnClick()
         {
-            if (Functions.CheckIfMouseHover(Shape.Size, Shape.Position, MyWindow.window) && Mouse.IsButtonPressed(Mouse.Button.Left) && MyWindow.MouseButtonWasPressed == false)
+            if (Functions.CheckIfMouseHover(Shape.Size, Shape.Position, ObjectsBank.window) && Mouse.IsButtonPressed(Mouse.Button.Left) && ObjectsBank.MouseButtonWasPressed == false)
             {
                 if (Adding!=null)
                 Adding.Invoke();
@@ -132,7 +133,7 @@ namespace GameProject.Elements
                 Main.Invoke();
 
                 if (FutureUser!=null)
-                    MyWindow.game.SetPlayer(ref FutureUser);
+                    ObjectsBank.game.SetPlayer(ref FutureUser);
 
             }
 

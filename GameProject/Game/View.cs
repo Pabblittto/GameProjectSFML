@@ -45,10 +45,10 @@ namespace GameProject.Game
 
         public void Render()
         {
-            MyWindow.window.Draw(Field);
-            MyWindow.window.Draw(testOfTile);
+            ObjectsBank.window.Draw(Field);
+            ObjectsBank.window.Draw(testOfTile);
 
-            MyWindow.window.Draw(test);
+            ObjectsBank.window.Draw(test);
         }
 
         public void CheckEvents()

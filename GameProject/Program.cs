@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
+using GameProject.Game;
 
 namespace GameProject
 {
@@ -15,6 +16,8 @@ namespace GameProject
         public static Clock clock = new Clock();// global clock to make some hronical events etc.
         static void Main(string[] args)
         {
+
+            ObjectsBank.LoadAll();// load all textures
 
             MyWindow window = new MyWindow(new VideoMode(1800, 900), "GAME");
               MenuObj = new Menu(window);
@@ -35,7 +38,7 @@ namespace GameProject
                 window.RenderSomeElements.Invoke(window);
                 window.CheckSomeEents.Invoke(window);
 
-                MyWindow.CheckMouseLeftButton();
+                ObjectsBank.CheckMouseLeftButton();
                 window.Display();
             }
         }// Main

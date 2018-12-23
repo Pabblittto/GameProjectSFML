@@ -19,10 +19,10 @@ namespace GameProject.Game.Objects
         protected uint TrunkCapacity;// how many cargo ship can have
         protected uint CrewCapacity; // how many crew ship can contain
         protected uint CanoonNumber;// how many canoons ship can contain
-        protected RectangleShape HitBox;
+        public RectangleShape HitBox;
         protected Texture NormalShip;
         protected Texture SideShip;
-        Sprite shape;
+        public Sprite shape;
         IntRect RightSide;// way to render a texture of rotatated ship
         IntRect LeftSide;
 

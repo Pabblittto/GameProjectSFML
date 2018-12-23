@@ -20,7 +20,7 @@ namespace GameProject.Elements
 
         public TextInput(Vector2f boxSize,Vector2f Position, Color textColor)
         {
-            MyWindow.window.TextEntered += TextEntering;
+            ObjectsBank.window.TextEntered += TextEntering;
 
             Shape = new RectangleShape(boxSize)
             {
@@ -28,7 +28,7 @@ namespace GameProject.Elements
                 FillColor = Color.White
             };
 
-            Content = new Text("", MyWindow.MyFont, (uint)boxSize.Y - 10)
+            Content = new Text("", ObjectsBank.MyFont, (uint)boxSize.Y - 10)
             {
                 Color = textColor,
                 Position = new Vector2f(Shape.Position.X + 10, Shape.Position.Y + 5)
@@ -68,8 +68,8 @@ namespace GameProject.Elements
 
         public void Draw()// method to draw this obiect 
         {
-            MyWindow.window.Draw(Shape);
-            MyWindow.window.Draw(Content);
+            ObjectsBank.window.Draw(Shape);
+            ObjectsBank.window.Draw(Content);
         }
 
         public void Clear()

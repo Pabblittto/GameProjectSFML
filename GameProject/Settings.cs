@@ -8,6 +8,7 @@ using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
 using GameProject.Elements;
+using GameProject.Game;
 
 namespace GameProject
 {
@@ -21,8 +22,7 @@ namespace GameProject
         {
             BackSite =new Sprite(FromMenu);
             BackSite.Color = new Color(255, 255, 255, 128);// semi transparent background
-            //Back = new Button(new Vector2f(250, 50), new Vector2f(20, 800), new Color(0, 250, 255), new Color(0, 152, 155), "Back", MyWindow.MyFont,MyWindow.window,menu);
-            Back = new Button(new Vector2f(20, 800), new Vector2f(250, 50),new Color(0, 250, 255), new Color(0, 152, 155), MyWindow.MyFont, "Back", 30, menu, 1);
+            Back = new Button(new Vector2f(20, 800), new Vector2f(250, 50),new Color(0, 250, 255), new Color(0, 152, 155), ObjectsBank.MyFont, "Back", 30, menu, 1);
 
         }
 

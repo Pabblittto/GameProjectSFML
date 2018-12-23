@@ -26,16 +26,14 @@ namespace GameProject.Game
             
             NameInput = new TextInput(new Vector2f(450, 50), new Vector2f(665, 70), Color.Black);
 
-            Info = new Text("Whats youry name Capitan?", MyWindow.MyFont, 40)
+            Info = new Text("Whats youry name Capitan?", ObjectsBank.MyFont, 40)
             {
                 Position = new Vector2f(625, 10),
                 Color = Color.Black
             };
 
-            ok = new Button(new Vector2f(925, 130), new Vector2f(250, 50), new Color(0, 250, 255), new Color(0, 152, 155), MyWindow.MyFont, "Adventure!", 30, MyWindow.game,1);
-            //  ok = new Button(new Vector2f(250, 50), new Vector2f(925, 130), new Color(0, 250, 255), new Color(0, 152, 155), "Adventure!", MyWindow.MyFont, MyWindow.window, MyWindow.game);// in null place one have to place pointer to player obiect
-            back = new Button(new Vector2f(625, 130), new Vector2f(250, 50), new Color(0, 250, 255), new Color(0, 152, 155), MyWindow.MyFont, "Back", 30, menu,1);
-            //back = new Button(new Vector2f(250, 50), new Vector2f(625, 130), new Color(0, 250, 255), new Color(0, 152, 155), "Back", MyWindow.MyFont, MyWindow.window,menu);
+            ok = new Button(new Vector2f(925, 130), new Vector2f(250, 50), new Color(0, 250, 255), new Color(0, 152, 155), ObjectsBank.MyFont, "Adventure!", 30, ObjectsBank.game,1);
+            back = new Button(new Vector2f(625, 130), new Vector2f(250, 50), new Color(0, 250, 255), new Color(0, 152, 155), ObjectsBank.MyFont, "Back", 30, menu,1);
             ok.Center();
             back.Center();
 

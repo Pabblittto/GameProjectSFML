@@ -30,20 +30,17 @@ namespace GameProject.Game.UsrInt
                 OutlineColor = Color.Black,
                 OutlineThickness = 5,
                 Origin = new Vector2f(temp.X / 2, temp.Y / 2),
-                Position= new Vector2f(MyWindow.window.Size.X/2, MyWindow.window.Size.Y/2),
+                Position= new Vector2f(ObjectsBank.window.Size.X/2, ObjectsBank.window.Size.Y/2),
                 FillColor= new Color(184,111,111,67)
             };
 
-            Close = new Button(new Vector2f(this.shape.Position.X + 215, this.shape.Position.Y - 45), new Vector2f(30, 38), Color.Red, new Color(137, 4, 4), MyWindow.MyFont, "X", 30, null, 2);
-            //Close = new Button2(new Vector2f(this.shape.Position.X + 215, this.shape.Position.Y - 45), new Vector2f(30, 38), Color.Red, new Color(137, 4, 4), MyWindow.MyFont, "X", 30);
+            Close = new Button(new Vector2f(this.shape.Position.X + 215, this.shape.Position.Y - 45), new Vector2f(30, 38), Color.Red, new Color(137, 4, 4), ObjectsBank.MyFont, "X", 30, null, 2);
             Close.SetOneFunction(SetDesactive);
-            SaveAndClose = new Button(new Vector2f(this.shape.Position.X - 240, this.shape.Position.Y - 10), new Vector2f(200, 50), new Color(0, 250, 255), new Color(0, 152, 155), MyWindow.MyFont, "Save & Exit", 30, null, 2);
+            SaveAndClose = new Button(new Vector2f(this.shape.Position.X - 240, this.shape.Position.Y - 10), new Vector2f(200, 50), new Color(0, 250, 255), new Color(0, 152, 155), ObjectsBank.MyFont, "Save & Exit", 30, null, 2);
 
-            //SaveAndClose = new Button2(new Vector2f(this.shape.Position.X - 240, this.shape.Position.Y-10), new Vector2f(200, 50), new Color(0, 250, 255), new Color(0, 152, 155), MyWindow.MyFont, "Save & Exit", 30);
             SaveAndClose.AddingAdditionalFunction(User.Save);
-            SaveAndClose.AddingAdditionalFunction(MyWindow.window.CloseThis);//
+            SaveAndClose.AddingAdditionalFunction(ObjectsBank.window.CloseThis);//
 
-                //(new Vector2f(30,30),new Vector2f(this.shape.Position.X+220,this.shape.Position.Y-145),Color.Red,new Color(137,4,4),"X",MyWindow.MyFont,MyWindow.window,)
 
         }
 
