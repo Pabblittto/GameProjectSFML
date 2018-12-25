@@ -17,7 +17,7 @@ namespace GameProject.Game
     {
         SFML.Graphics.View UserLeftSite;
         SFML.Graphics.View MapRightSite;
-        static public Ship BeginnerShip = new Ship(new Vector2f(65, 100), 5, 10, 5, "Res/Ships/Ship2.png","Res/Ships/Side.png",new Vector2f(20,20),90);
+        static public Ship BeginnerShip = new Ship(new Vector2f(65, 100), 5, 10, 5, "Res/Ships/Ship2.png","Res/Ships/Side.png",new Vector2f(20,20),90,100,60);
 
 
         Player User;
@@ -58,7 +58,12 @@ namespace GameProject.Game
             WindRose = new Wind(new Vector2f(1710,80));
 
             ObjectsBank.ColisionThread = new System.Threading.Thread(CheckColision);
-            ObjectsBank.ColisionThread.Start();// ten start moze byc w move a while w środku zmienionu na while wokłó jest jakiś lad, mielizna
+            // ObjectsBank.ColisionThread.Start();// ten start moze byc w move a while w środku zmienionu na while wokłó jest jakiś lad, mielizna
+
+            ObjectsBank.ListOfMethodToExegute += User.UserShip.CalculatePos;
+            ObjectsBank.MovingThread = new System.Threading.Thread( ObjectsBank.EndlassFuncForThreat);
+            ObjectsBank.MovingThread.Start();
+
         }
 
 
@@ -66,6 +71,10 @@ namespace GameProject.Game
 
         public override void Render(MyWindow window)
         {
+           // ObjectsBank.MovingThread = new System.Threading.Thread(() => User.UserShip.CalculatePos(Wind.VectorOfWind, Wind.valueOfWind));
+          //  ObjectsBank.MovingThread.Start();
+           // User.UserShip.CalculatePos(Wind.VectorOfWind, Wind.valueOfWind);
+
             window.SetView(UserLeftSite);
             UserInterface.Render();
             UserInterface.CheckEvents();
@@ -77,6 +86,9 @@ namespace GameProject.Game
             MyMap.Render();
 
 
+            CollisionRectangle.Rotation = User.UserShip.shape.Rotation;
+            CollisionRectangle.Position = User.UserShip.shape.Position;
+           // User.UserShip.CalculatePos(WindRose.VectorOfWind, WindRose.valueOfWind);
 
 
             if (User != null)
@@ -99,11 +111,11 @@ namespace GameProject.Game
         {
             while (true)
             {
-                foreach (MyTile item in MyMap.TilesToColision)
-                {
-                    ObjectsBank.PunishtoSpeed=Functions.CheckColision(CollisionRectangle,item);
+                //foreach (MyTile item in MyMap.TilesToColision)
+              //  {
+               //     ObjectsBank.PunishtoSpeed=Functions.CheckColision(CollisionRectangle,item);
                    // Console.WriteLine("Punish speed:"+ ObjectsBank.PunishtoSpeed);
-                }
+               // }
             }
         }
 
@@ -120,7 +132,7 @@ namespace GameProject.Game
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.Down))
             {
-                User.UserShip.Move(y-ObjectsBank.PunishtoSpeed*y); //this dont work well :/
+                User.UserShip.Move(y*Program.clockmeasure); //this dont work well :/
                 User.UserShip.Rotate(0);
                 CollisionRectangle.Position = User.UserShip.shape.Position;
 
@@ -148,14 +160,14 @@ namespace GameProject.Game
             if (Keyboard.IsKeyPressed(Keyboard.Key.D))
             {
                 User.UserShip.Rotate(0.1f);        
-                CollisionRectangle.Rotation = User.UserShip.shape.Rotation;
+               
 
             }
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.A))
             {
                 User.UserShip.Rotate( -0.1f);
-                CollisionRectangle.Rotation = User.UserShip.shape.Rotation;
+                
 
             }
             if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))
@@ -168,25 +180,25 @@ namespace GameProject.Game
             }
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
             {
-                Console.Clear();
+                Wind.valueOfWind = 0;
             }
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.H))
             {
-                WindRose.VectorOfWind = Functions.RotateVector(WindRose.VectorOfWind, -1);
+                Wind.VectorOfWind = Functions.RotateVector(Wind.VectorOfWind, -1);
 
             }
             if (Keyboard.IsKeyPressed(Keyboard.Key.K))
             {
-                WindRose.VectorOfWind = Functions.RotateVector(WindRose.VectorOfWind, 1);
+                Wind.VectorOfWind = Functions.RotateVector(Wind.VectorOfWind, 1);
             }
             if (Keyboard.IsKeyPressed(Keyboard.Key.U))
             {
-                WindRose.AddToValue(0.3f);
+                WindRose.AddToValue(1f);
             }
             if (Keyboard.IsKeyPressed(Keyboard.Key.J))
             {
-                WindRose.AddToValue(-0.3f);
+                WindRose.AddToValue(-1f);
 
             }
 

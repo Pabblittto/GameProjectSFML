@@ -38,8 +38,8 @@ namespace GameProject.Game.Objects
 
         Vector2f vectorPointingN;// obracając wektor dzieki funkcji w Functions 
         Vector2f PositionOnWindow;
-        public Vector2f VectorOfWind;// direction , always need to have lenght=1
-        float valueOfWind;
+        static public Vector2f VectorOfWind;// direction , always need to have lenght=1
+        static public float valueOfWind;
         Text ValueofWindText;
 
         RectangleShape shape = new RectangleShape(new Vector2f(160, 160))
@@ -76,7 +76,7 @@ namespace GameProject.Game.Objects
             EL.Position = PositionOnWindow + Functions.RotateVector(vectorPointingN, 90);
 
             VectorOfWind = new Vector2f(1, 0);
-            valueOfWind = 10.1f;
+            valueOfWind = 0f;
             ValueofWindText = new Text(valueOfWind.ToString(), ObjectsBank.MyFont, 30);
             ValueofWindText.Origin = new Vector2f(20, 15);
         }
@@ -113,8 +113,10 @@ namespace GameProject.Game.Objects
             EL.Position = PositionOnWindow + Functions.RotateVector(temp, 90);
             arrowInShape.Rotation = degree;
 
-            arrowInShape.Rotation= (float)Math.Atan2(VectorOfWind.Y , VectorOfWind.X) * 180 / (float)Math.PI + degree;
+            arrowInShape.Rotation= (float)Math.Atan2(VectorOfWind.Y , VectorOfWind.X) * 180 / (float)Math.PI +degree +90;
 
+            //Console.Clear();
+            //Console.WriteLine(VectorOfWind.ToString());
 
             ValueofWindText.Position = PositionOnWindow;
             ValueofWindText.DisplayedString = valueOfWind.ToString();

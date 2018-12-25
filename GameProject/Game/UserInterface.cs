@@ -25,7 +25,7 @@ namespace GameProject.Game
         RectangleShape AllField;
         Player User;
         ShipCrewContainer CrewContainer;
-    
+        Text Speed;
         
 
         public UserInterface(Player PlayerObj)
@@ -54,8 +54,16 @@ namespace GameProject.Game
 
             User = PlayerObj;
             CrewContainer = new ShipCrewContainer(User);
-       
+            Speed = new Text(Functions.DistBetwPoints(new Vector2f(0, 0), User.UserShip.SpeedVect).ToString(), ObjectsBank.MyFont, 30);
+            Speed.Position = new Vector2f(50, 200);
+            Speed.Color = Color.Black;
 
+
+        }
+
+        private void UpadteSpeed()
+        {
+            Speed.DisplayedString = Functions.DistBetwPoints(new Vector2f(0, 0), User.UserShip.SpeedVect).ToString();
         }
 
         public void Render()
@@ -70,6 +78,7 @@ namespace GameProject.Game
             //MyWindow.window.Draw(cannontest);
 
             ObjectsBank.window.Draw(CrewContainer);
+            ObjectsBank.window.Draw(Speed);
 
             if(ObjectsBank.MouseIsDragging==true && ObjectsBank.DraggedCard != null)// this if makes draged card more visible
             {
@@ -80,6 +89,7 @@ namespace GameProject.Game
 
         public void CheckEvents()
         {
+            UpadteSpeed();
 
 
             //test.DrawInfoBox();

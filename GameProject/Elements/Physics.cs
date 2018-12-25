@@ -14,7 +14,9 @@ namespace GameProject.Elements
         public float speed;
         public Vector2f SpeedVect;
 
-        abstract public void CalculatePos(Vector2f ForceVect);//calculate position this function takes time from program class
+
+
+        abstract public void CalculatePos();//calculate position this function takes time from program class
 
 
     }

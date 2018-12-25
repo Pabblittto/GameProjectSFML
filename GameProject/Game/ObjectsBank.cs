@@ -38,7 +38,23 @@ namespace GameProject.Game
                                                          // this wariable prevent that.
 
         public static Thread ColisionThread;
-        public static ThreadStart CollisionThreadFunct;
+        public static Thread MovingThread;// thread for moving ship
+        public static ThreadStart ListOfMethodToExegute;
+
+        public static Clock clockNr2;// global clock to make some hronical events etc.
+        public static float DeltaTime;
+
+        public static void EndlassFuncForThreat()
+        {
+            
+            while(true)
+            {
+                DeltaTime= clockNr2.Restart().AsSeconds();
+
+                ObjectsBank.ListOfMethodToExegute();
+            }
+
+        }
 
         public static void CheckMouseLeftButton()// if you want to know whaat is it, read comment near MouseButtonWasPressed variable
         {
@@ -53,6 +69,8 @@ namespace GameProject.Game
         /// </summary>
            static  public void LoadAll()
         {
+            clockNr2 = new Clock();
+
             WindRose = new Texture("Res/Map/windrose.png");
             WindArrow = new Texture("Res/Map/arrow.png");
             land = new Texture("Res/Map/land.bmp");

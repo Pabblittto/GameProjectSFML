@@ -15,6 +15,7 @@ namespace GameProject
     {
         static public Menu MenuObj;
         public static Clock clock = new Clock();// global clock to make some hronical events etc.
+        public static float clockmeasure;//
         static void Main(string[] args)
         {
 
@@ -25,10 +26,11 @@ namespace GameProject
 
             window.CheckSomeEents = MenuObj.CheckEvents;
             window.RenderSomeElements = MenuObj.Render;
+            window.SetFramerateLimit(120);
 
             while (window.IsOpen)
             {
-                clock.Restart();
+                
 
                 MyWindow.UpdateTickTAck();
 
@@ -36,11 +38,14 @@ namespace GameProject
                 window.Clear();
                 window.DispatchEvents();
 
+                clockmeasure = clock.ElapsedTime.AsSeconds();
+
                 window.RenderSomeElements.Invoke(window);
                 window.CheckSomeEents.Invoke(window);
 
                 ObjectsBank.CheckMouseLeftButton();
                 window.Display();
+                clock.Restart();
             }
         }// Main
     }

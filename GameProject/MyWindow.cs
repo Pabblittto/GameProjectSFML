@@ -40,8 +40,14 @@ namespace GameProject
         private void Onclose(object sender, EventArgs e)//need to add warning and save window
         {
             MyWindow window = (MyWindow)sender;
+
+            if(ObjectsBank.ColisionThread!=null)
             ObjectsBank.ColisionThread.Abort();
-            window.Close();
+
+            if (ObjectsBank.MovingThread != null)
+                ObjectsBank.MovingThread.Abort();
+
+                window.Close();
         }
 
         public static void UpdateTickTAck()
