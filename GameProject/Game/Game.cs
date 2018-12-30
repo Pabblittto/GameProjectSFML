@@ -17,7 +17,7 @@ namespace GameProject.Game
     {
         SFML.Graphics.View UserLeftSite;
         SFML.Graphics.View MapRightSite;
-        static public Ship BeginnerShip = new Ship(new Vector2f(65, 100), 5, 10, 5, "Res/Ships/Ship2.png","Res/Ships/Side.png",new Vector2f(20,20),90,100,60);
+        static public Ship BeginnerShip = new Ship(new Vector2f(65, 100), 5, 10, 5, "Res/Ships/Ship2.png","Res/Ships/Side.png",new Vector2f(20,20),90,100,120);
 
 
         Player User;
@@ -29,12 +29,16 @@ namespace GameProject.Game
 
         public GameObj()
         {
-            UserLeftSite = new SFML.Graphics.View(new FloatRect(0,0,800,900));
-            UserLeftSite.Viewport = new FloatRect(0,0,8/18f,1f);
+            UserLeftSite = new SFML.Graphics.View(new FloatRect(0, 0, 800, 900))
+            {
+                Viewport = new FloatRect(0, 0, 8 / 18f, 1f)
+            };
 
-            MapRightSite = new SFML.Graphics.View(new FloatRect(0,0,1000,900));
-            MapRightSite.Viewport = new FloatRect(8 / 18f, 0, 10 / 18f, 1f);
-            
+            MapRightSite = new SFML.Graphics.View(new FloatRect(0, 0, 1000, 900))
+            {
+                Viewport = new FloatRect(8 / 18f, 0, 10 / 18f, 1f)
+            };
+
 
 
         }
@@ -71,6 +75,17 @@ namespace GameProject.Game
 
         public override void Render(MyWindow window)
         {
+
+            //ObjectsBank.ElapsedTime+=Program.clock.ElapsedTime.AsSeconds();
+            //Console.WriteLine(Program.clock.ElapsedTime.AsSeconds().ToString());
+
+            //while(ObjectsBank.ElapsedTime > ObjectsBank.timeStep)
+            //{
+            //    ObjectsBank.ListOfMethodToExegute();
+            //    ObjectsBank.ElapsedTime -= ObjectsBank.timeStep;
+            //}
+
+
            // ObjectsBank.MovingThread = new System.Threading.Thread(() => User.UserShip.CalculatePos(Wind.VectorOfWind, Wind.valueOfWind));
           //  ObjectsBank.MovingThread.Start();
            // User.UserShip.CalculatePos(Wind.VectorOfWind, Wind.valueOfWind);

@@ -145,22 +145,21 @@ namespace GameProject.Game.Objects
         public override void CalculatePos()// to nie działa dobrze, 
         {
 
-                if (Program.clockmeasure > testmax)             //this works preety well, but need fix with 
-                    testmax = Program.clockmeasure;
+                         //this works preety well, but need fix with 
 
                 //double time = ObjectsBank.DeltaTime;
 
                 // double time = 0.00000012 * 1000;
 
 
-                float number = (float)Math.Pow(ObjectsBank.DeltaTime, 2) / (mass * 2);
-                Vector2f velocity = Wind.VectorOfWind * number * Wind.valueOfWind * 10000;
+                float number = (float)Math.Pow(ObjectsBank.timeStep, 2) / (mass * 2);
+                Vector2f velocity = Wind.VectorOfWind * number * Wind.valueOfWind*10000 ;
 
             if (Functions.DistBetwPoints(new Vector2f(0, 0), SpeedVect) < 2f / 10f * MaxSpeed)
-                Friction = -SpeedVect * (float)ObjectsBank.DeltaTime/100000; //static friction
+                Friction = -SpeedVect * (float)ObjectsBank.timeStep ; //static friction
             else
-                Friction = mass * (1f / 100000f) * -1 * SpeedVect / 100000f;// dynamic friction
-                 // mi *mass*G*20%* -velocity;
+                Friction = mass * -1 * SpeedVect / 100000f;// dynamic friction
+                                                             // mi* mass*G * 20 % *-velocity;
 
 
             if (Functions.DistBetwPoints(new Vector2f(0, 0), SpeedVect + velocity) < MaxSpeed)
@@ -172,15 +171,14 @@ namespace GameProject.Game.Objects
                 //Console.WriteLine("Vector of wind:" + Wind.VectorOfWind.ToString());
                 //Console.WriteLine("velocuty " + velocity.ToString());
                 //Console.WriteLine("speed vector of ship:" + SpeedVect.ToString());
-               // Console.WriteLine("dlugosc vektora predkosci:" + Functions.DistBetwPoints(new Vector2f(0, 0), SpeedVect));
+                //Console.WriteLine("dlugosc vektora predkosci:" + Functions.DistBetwPoints(new Vector2f(0, 0), SpeedVect));
                 //Console.WriteLine("wektor oporu"+ Friction);
                 //Console.WriteLine("czas:" + ObjectsBank.DeltaTime);
                 //Console.WriteLine(testmax);
                 //Console.WriteLine(i);
                 //i++;
 
-
-                this.PositionOnMap += SpeedVect * (float)ObjectsBank.DeltaTime * 2;// to jest potrzebne nie ruszać
+                this.PositionOnMap += SpeedVect * (float)ObjectsBank.timeStep*2 ;// to jest potrzebne nie ruszać
 
             
             

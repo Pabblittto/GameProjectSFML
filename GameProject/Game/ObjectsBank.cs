@@ -42,16 +42,22 @@ namespace GameProject.Game
         public static ThreadStart ListOfMethodToExegute;
 
         public static Clock clockNr2;// global clock to make some hronical events etc.
-        public static float DeltaTime;
+        public static float ElapsedTime;
+        public static float timeStep = 0.0083f;
 
         public static void EndlassFuncForThreat()
         {
             
             while(true)
             {
-                DeltaTime= clockNr2.Restart().AsSeconds();
-
-                ObjectsBank.ListOfMethodToExegute();
+                //ElapsedTime += Program.clock.ElapsedTime.AsSeconds();
+                //ElapsedTime = Program.clock.ElapsedTime.AsSeconds();
+                while (ElapsedTime > timeStep)
+                {
+                    ObjectsBank.ListOfMethodToExegute();
+                    ElapsedTime -= timeStep;
+                    //clockNr2.Restart();
+                }
             }
 
         }
@@ -68,17 +74,19 @@ namespace GameProject.Game
         /// loading all textures to bank
         /// </summary>
            static  public void LoadAll()
-        {
-            clockNr2 = new Clock();
+            {
+           clockNr2 = new Clock();
 
-            WindRose = new Texture("Res/Map/windrose.png");
-            WindArrow = new Texture("Res/Map/arrow.png");
-            land = new Texture("Res/Map/land.bmp");
-            water = new Texture("Res/Map/water.bmp");
-            error = new Texture("Res/Map/error.bmp");
-            shallow = new Texture("Res/Map/shallow.bmp");
-            LettersToCompas= new Texture("Res/Map/letters.png");
+                WindRose = new Texture("Res/Map/windrose.png");
+                WindArrow = new Texture("Res/Map/arrow.png");
+                land = new Texture("Res/Map/land.bmp");
+                water = new Texture("Res/Map/water.bmp");
+                error = new Texture("Res/Map/error.bmp");
+                shallow = new Texture("Res/Map/shallow.bmp");
+                LettersToCompas = new Texture("Res/Map/letters.png");
 
-        }
+
+
+            }
     }
 }

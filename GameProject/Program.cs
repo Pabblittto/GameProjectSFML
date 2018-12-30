@@ -44,8 +44,9 @@ namespace GameProject
                 window.CheckSomeEents.Invoke(window);
 
                 ObjectsBank.CheckMouseLeftButton();
+
                 window.Display();
-                clock.Restart();
+                ObjectsBank.ElapsedTime+= clock.Restart().AsSeconds();
             }
         }// Main
     }
