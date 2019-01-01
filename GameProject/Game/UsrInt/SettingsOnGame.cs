@@ -47,9 +47,10 @@ namespace GameProject.Game.UsrInt
         public void SetDesactive()
         {
             active = false;
+            ObjectsBank.ClockPause = false;
         }
 
-        public void SetActive(string a)//this string is required becoues of button2 way of working
+        public void SetActive()//this string is required becoues of button2 way of working
         {
             active = true;
         }

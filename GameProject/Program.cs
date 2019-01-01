@@ -28,6 +28,7 @@ namespace GameProject
             window.RenderSomeElements = MenuObj.Render;
             window.SetFramerateLimit(120);
 
+
             while (window.IsOpen)
             {
                 
@@ -38,7 +39,7 @@ namespace GameProject
                 window.Clear();
                 window.DispatchEvents();
 
-                clockmeasure = clock.ElapsedTime.AsSeconds();
+                
 
                 window.RenderSomeElements.Invoke(window);
                 window.CheckSomeEents.Invoke(window);
@@ -46,7 +47,12 @@ namespace GameProject
                 ObjectsBank.CheckMouseLeftButton();
 
                 window.Display();
-                ObjectsBank.ElapsedTime+= clock.Restart().AsSeconds();
+
+
+                if (ObjectsBank.ClockPause == false)
+                    ObjectsBank.ElapsedTime += clock.ElapsedTime.AsSeconds();// everything based on time need to be connected with this variable
+
+                clock.Restart();
             }
         }// Main
     }

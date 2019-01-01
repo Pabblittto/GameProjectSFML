@@ -13,7 +13,7 @@ namespace GameProject.Game.Objects
     {
 
 
-        public UsrShip(Vector2f SizeOfShip, uint CrewAmount, uint TrunkAmount, uint CanoonAmount, string TexturePath,string TexttureSideShip, Vector2f positionOfShip, float Degree,float mass,float maxspeed) :base(SizeOfShip,CrewAmount,TrunkAmount,CanoonAmount,TexturePath,TexttureSideShip,positionOfShip,Degree,mass,maxspeed)
+        public UsrShip(Vector2f SizeOfShip, uint CrewAmount, uint TrunkAmount, uint CanoonAmount, string TexturePath,string TexttureSideShip, Vector2f positionOfShip, float Degree,float mass,float maxspeed,int SailAmount) :base(SizeOfShip,CrewAmount,TrunkAmount,CanoonAmount,TexturePath,TexttureSideShip,positionOfShip,Degree,mass,maxspeed, SailAmount)
         {
             
         }

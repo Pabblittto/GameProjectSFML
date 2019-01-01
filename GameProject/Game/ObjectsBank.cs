@@ -14,7 +14,9 @@ namespace GameProject.Game
 {
      static class ObjectsBank// static class with only statisc elements, this contains all textures, fonts etc. Everything is loaded in constructor. Constructor is called once, before all game
     {
-        public static float PunishtoSpeed = 0;
+
+
+        public static float PunishtoSpeed = 0;// variable which defines how speed of ship should be lower- if one will add other AI ships, this should be moved to ship class
 
         public static Texture WindRose;
         public static Texture WindArrow;
@@ -41,25 +43,22 @@ namespace GameProject.Game
         public static Thread MovingThread;// thread for moving ship
         public static ThreadStart ListOfMethodToExegute;
 
-        public static Clock clockNr2;// global clock to make some hronical events etc.
-        public static float ElapsedTime;
-        public static float timeStep = 0.0083f;
 
-        public static void EndlassFuncForThreat()
+        public static float ElapsedTime;// it is set in program class // everything based on time need to be connected with this variable
+        public static float timeStep = 0.0083f;// time step set by my self, 0.0083 s. it is about 120fps (i hope it works like that)
+        public static bool ClockPause = false;// it defines if the clock is paused- all time based action will be stopped
+
+        public static void EndlassFuncForThreat()// function called by second thread, if need add more function-add it to delegate  ListOfMethodToExecute 
         {
-            
             while(true)
             {
-                //ElapsedTime += Program.clock.ElapsedTime.AsSeconds();
-                //ElapsedTime = Program.clock.ElapsedTime.AsSeconds();
+
                 while (ElapsedTime > timeStep)
                 {
                     ObjectsBank.ListOfMethodToExegute();
                     ElapsedTime -= timeStep;
-                    //clockNr2.Restart();
                 }
             }
-
         }
 
         public static void CheckMouseLeftButton()// if you want to know whaat is it, read comment near MouseButtonWasPressed variable
@@ -75,7 +74,8 @@ namespace GameProject.Game
         /// </summary>
            static  public void LoadAll()
             {
-           clockNr2 = new Clock();
+           
+
 
                 WindRose = new Texture("Res/Map/windrose.png");
                 WindArrow = new Texture("Res/Map/arrow.png");

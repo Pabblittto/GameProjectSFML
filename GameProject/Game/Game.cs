@@ -17,7 +17,7 @@ namespace GameProject.Game
     {
         SFML.Graphics.View UserLeftSite;
         SFML.Graphics.View MapRightSite;
-        static public Ship BeginnerShip = new Ship(new Vector2f(65, 100), 5, 10, 5, "Res/Ships/Ship2.png","Res/Ships/Side.png",new Vector2f(20,20),90,100,120);
+        static public Ship BeginnerShip = new Ship(new Vector2f(65, 100), 5, 10, 5, "Res/Ships/Ship2.png","Res/Ships/Side.png",new Vector2f(20,20),0,100,120,2);
 
 
         Player User;
@@ -62,7 +62,7 @@ namespace GameProject.Game
             WindRose = new Wind(new Vector2f(1710,80));
 
             ObjectsBank.ColisionThread = new System.Threading.Thread(CheckColision);
-            // ObjectsBank.ColisionThread.Start();// ten start moze byc w move a while w środku zmienionu na while wokłó jest jakiś lad, mielizna
+             ObjectsBank.ColisionThread.Start();// ten start moze byc w move a while w środku zmienionu na while wokłó jest jakiś lad, mielizna
 
             ObjectsBank.ListOfMethodToExegute += User.UserShip.CalculatePos;
             ObjectsBank.MovingThread = new System.Threading.Thread( ObjectsBank.EndlassFuncForThreat);
@@ -76,19 +76,6 @@ namespace GameProject.Game
         public override void Render(MyWindow window)
         {
 
-            //ObjectsBank.ElapsedTime+=Program.clock.ElapsedTime.AsSeconds();
-            //Console.WriteLine(Program.clock.ElapsedTime.AsSeconds().ToString());
-
-            //while(ObjectsBank.ElapsedTime > ObjectsBank.timeStep)
-            //{
-            //    ObjectsBank.ListOfMethodToExegute();
-            //    ObjectsBank.ElapsedTime -= ObjectsBank.timeStep;
-            //}
-
-
-           // ObjectsBank.MovingThread = new System.Threading.Thread(() => User.UserShip.CalculatePos(Wind.VectorOfWind, Wind.valueOfWind));
-          //  ObjectsBank.MovingThread.Start();
-           // User.UserShip.CalculatePos(Wind.VectorOfWind, Wind.valueOfWind);
 
             window.SetView(UserLeftSite);
             UserInterface.Render();
@@ -103,14 +90,13 @@ namespace GameProject.Game
 
             CollisionRectangle.Rotation = User.UserShip.shape.Rotation;
             CollisionRectangle.Position = User.UserShip.shape.Position;
-           // User.UserShip.CalculatePos(WindRose.VectorOfWind, WindRose.valueOfWind);
 
 
             if (User != null)
             {
                 User.UserShip.UpdateView(MapRightSite);
                 window.Draw(User.UserShip);
-                window.Draw(CollisionRectangle);
+                //window.Draw(CollisionRectangle); // pink rectangle shape for colision
             }
             window.SetView(window.DefaultView);
             window.Draw(settings);
@@ -122,16 +108,41 @@ namespace GameProject.Game
         }
 
 
-        private void CheckColision()
+        private void CheckColision()// if there will be added AI ships , this function need to be moved to ship Class
         {
-            while (true)
-            {
-                //foreach (MyTile item in MyMap.TilesToColision)
-              //  {
-               //     ObjectsBank.PunishtoSpeed=Functions.CheckColision(CollisionRectangle,item);
-                   // Console.WriteLine("Punish speed:"+ ObjectsBank.PunishtoSpeed);
-               // }
-            }
+            //List<float> ListOfActualPunish = new List<float>();//this list contains contemporary all punishes for speed due to colision wiyh some objects
+            //float max=0;
+            // after  adding, thread find the biggest number from that list
+            //float tmp;
+
+            //while (true)
+            //{
+            //    // max=0;
+            //    // ListOfActualPunish.Clear();
+            //    foreach (MyTile item in MyMap.TilesToColision)
+            //    {
+            //        //ListOfActualPunish.Add(Functions.CheckColision(CollisionRectangle, item));
+
+            //        ObjectsBank.PunishtoSpeed = Functions.CheckColision(CollisionRectangle, item);// so far works the best
+
+            //        //tmp = Functions.CheckColision(CollisionRectangle, item);
+            //        //if (max < tmp)                                                                  // to musi zostać poprawione
+            //        // to powoduje ogromne problemy że o jaaaaaaaaaaaaa...
+            //        //max = tmp;
+            //    }
+
+            //    //if (ListOfActualPunish.Count != 0)
+            //    //{
+            //    //    max = ListOfActualPunish[0];
+
+            //    //    foreach (float item in ListOfActualPunish)                        
+            //    //    {
+            //    //        if (max < item)
+            //    //            max = item;
+            //    //    }
+            //    // ObjectsBank.PunishtoSpeed = max;// there is counting max of punish , if ship is colliding with many different tiles with different punish
+            //    //}
+            //}
         }
 
         
@@ -150,49 +161,37 @@ namespace GameProject.Game
                 User.UserShip.Move(y*Program.clockmeasure); //this dont work well :/
                 User.UserShip.Rotate(0);
                 CollisionRectangle.Position = User.UserShip.shape.Position;
-
             }
-            float x = 1;
+
+            float x = 1;// this for "if" below
+
             if (Keyboard.IsKeyPressed(Keyboard.Key.Up))
             {
                 User.UserShip.Move(x-x*ObjectsBank.PunishtoSpeed);
                 User.UserShip.Rotate(0);
                 CollisionRectangle.Position = User.UserShip.shape.Position;
-
-
             }
 
-            //if (Keyboard.IsKeyPressed(Keyboard.Key.Right))
-            //{
-            //    MapRightSite.Move(new Vector2f(1, 0));
-            //}
-
-            //if (Keyboard.IsKeyPressed(Keyboard.Key.Left))
-            //{
-            //    MapRightSite.Move(new Vector2f(-1, 0));
-            //}
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.D))
             {
                 User.UserShip.Rotate(0.1f);        
-               
-
+                User.UserShip.ShipIsTurning();
             }
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.A))
             {
-                User.UserShip.Rotate( -0.1f);
-                
+                User.UserShip.Rotate(-0.1f);
+                User.UserShip.ShipIsTurning();
+            }
 
-            }
+
             if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))
             {
-                settings.SetActive("");
+                settings.SetActive();
+                ObjectsBank.ClockPause = true;
             }
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))
-            {
-                settings.SetActive("");
-            }
+
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
             {
                 Wind.valueOfWind = 0;
@@ -217,7 +216,13 @@ namespace GameProject.Game
 
             }
 
-
+            if (Keyboard.IsKeyPressed(Keyboard.Key.P))
+            {
+                    if (ObjectsBank.ClockPause == false)
+                        ObjectsBank.ClockPause = true;
+                    else
+                        ObjectsBank.ClockPause = false;
+            }
 
 
         }

@@ -26,7 +26,7 @@ namespace GameProject.Game.Objects
             if (type == 0)
                 SpeedPunish = 0;
             else if (type == 1)
-                SpeedPunish = 0.5f;
+                SpeedPunish = 0.02f;
             else
                 SpeedPunish = 1;
         }

@@ -54,7 +54,7 @@ namespace GameProject.Game
 
             User = PlayerObj;
             CrewContainer = new ShipCrewContainer(User);
-            Speed = new Text(Functions.DistBetwPoints(new Vector2f(0, 0), User.UserShip.SpeedVect).ToString(), ObjectsBank.MyFont, 30);
+            Speed = new Text(User.UserShip.speed.ToString(), ObjectsBank.MyFont, 30);
             Speed.Position = new Vector2f(50, 200);
             Speed.Color = Color.Black;
 
@@ -63,7 +63,7 @@ namespace GameProject.Game
 
         private void UpadteSpeed()
         {
-            Speed.DisplayedString = Functions.DistBetwPoints(new Vector2f(0, 0), User.UserShip.SpeedVect).ToString();
+            Speed.DisplayedString = User.UserShip.speed.ToString();
         }
 
         public void Render()

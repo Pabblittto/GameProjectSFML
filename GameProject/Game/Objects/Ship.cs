@@ -15,6 +15,7 @@ namespace GameProject.Game.Objects
     [Serializable]
     class Ship : Physics, Drawable // obiect of ship, hsve all properties, 
     {
+        int SailAmount = 1;//default number of sails
         public Vector2f PositionOnMap;
         public float DegreeOfShip = 0;
         protected uint TrunkCapacity;// how many cargo ship can have
@@ -27,16 +28,17 @@ namespace GameProject.Game.Objects
         IntRect RightSide;// way to render a texture of rotatated ship
         IntRect LeftSide;
 
-        Boolean changed = false;// i dont have idea what it is for
+        Boolean Turning = false;// if ship is turning, change texture;
         double MaxSpeed;
         Vector2f Friction;
 
-
-
-        Vector2f VectorOfSail = new Vector2f(1, 0);
         
 
-        public Ship(Vector2f SizeOfShip, uint CrewAmount, uint TrunkAmount, uint CanoonAmount,string TexturePath,string TexturePathSide, Vector2f positionOfShip,float Degree,float _mass,float _MaxSpeed)
+
+       public  Vector2f VectorOfSail = new Vector2f(1, 0);
+        
+
+        public Ship(Vector2f SizeOfShip, uint CrewAmount, uint TrunkAmount, uint CanoonAmount,string TexturePath,string TexturePathSide, Vector2f positionOfShip,float Degree,float _mass,float _MaxSpeed,int AmountFoSails)
         {
             RightSide = new IntRect((int)SizeOfShip.X,0,  -(int)SizeOfShip.X, (int)SizeOfShip.Y);
             LeftSide = new IntRect(new Vector2i(0, 0), (Vector2i)SizeOfShip);
@@ -63,7 +65,11 @@ namespace GameProject.Game.Objects
             };
             PositionOnMap = positionOfShip;
             DegreeOfShip = Degree;
+            VectorOfSail = Functions.RotateVector(VectorOfSail, DegreeOfShip);
 
+            DegreeOfShip += 90;// this is needed because 
+            SailAmount = AmountFoSails;
+            
         }
 
 
@@ -75,7 +81,8 @@ namespace GameProject.Game.Objects
         }
 
         public void UpdateShip()
-        { 
+        {
+            speed = Functions.DistBetwPoints(new Vector2f(0, 0), SpeedVect);
             shape.Position = PositionOnMap;
             shape.Rotation = DegreeOfShip;
 
@@ -87,8 +94,8 @@ namespace GameProject.Game.Objects
         {
             if(value<0)
             {
-                shape.Texture = SideShip;
-                if(DegreeOfShip == 0)
+                //shape.Texture = SideShip;
+                if(DegreeOfShip == 0)// to można ewentualnie zmidyfikować do >0.0001 większe do 0.1 coś takiego i to na dole podobnie
                 DegreeOfShip = 360;
             }
 
@@ -100,6 +107,7 @@ namespace GameProject.Game.Objects
 
             DegreeOfShip += value;
             VectorOfSail = Functions.RotateVector(VectorOfSail, value);
+            SpeedVect = Functions.RotateVector(SpeedVect, value);
 
                 if (value != 0)
                 {
@@ -126,13 +134,13 @@ namespace GameProject.Game.Objects
         /// </summary>
         public void Move(float value)
         {
-            if (value != 0)
-            {
-                double angle = Math.PI * ((double)DegreeOfShip-90 ) / 180.0;
-                float Cos = (float)Math.Cos(angle) * value;
-                float sin = (float)Math.Sin(angle) * value;
-                PositionOnMap += new Vector2f(Cos, sin);
-            }
+            //if (value != 0)
+            //{
+            //    double angle = Math.PI * ((double)DegreeOfShip ) / 180.0;// to musi zostać wyjebane
+            //    float Cos = (float)Math.Cos(angle) * value;
+            //    float sin = (float)Math.Sin(angle) * value;
+            //    PositionOnMap += new Vector2f(Cos, sin);
+            //}
 
         }
 
@@ -144,56 +152,85 @@ namespace GameProject.Game.Objects
         /// </summary>
         public override void CalculatePos()// to nie działa dobrze, 
         {
+            if(Keyboard.IsKeyPressed(Keyboard.Key.D)&&Turning==true)
+            {
+                shape.TextureRect = RightSide;
+            }
+            else if(Keyboard.IsKeyPressed(Keyboard.Key.A) && Turning == true)
+            {
+                shape.TextureRect = LeftSide;
+            }
+            else
+            {
+                Turning = false;
+                shape.Texture = NormalShip;
+            }
 
-                         //this works preety well, but need fix with 
+            float SailAndWind;
+            float AngleBetween = AngleBetweenVectors(this.VectorOfSail, Wind.VectorOfWind);
+            if (AngleBetween <= 90 && AngleBetween >= 0)// its ok, wind blows into sail
+                SailAndWind =1- AngleBetween / 90;
+            else
+                SailAndWind = 0;
 
-                //double time = ObjectsBank.DeltaTime;
 
-                // double time = 0.00000012 * 1000;
+            float value = (float)Math.Pow(ObjectsBank.timeStep, 2) / (mass * 2) * SailAndWind*SailAmount;
 
 
-                float number = (float)Math.Pow(ObjectsBank.timeStep, 2) / (mass * 2);
-                Vector2f velocity = Wind.VectorOfWind * number * Wind.valueOfWind*10000 ;
+            float ApparentWind;
+            if (Wind.valueOfWind != 0 )
+                ApparentWind = Wind.valueOfWind * SailAndWind - speed;
+            else
+                ApparentWind = 0;
 
-            if (Functions.DistBetwPoints(new Vector2f(0, 0), SpeedVect) < 2f / 10f * MaxSpeed)
+
+            Vector2f velocity = this.VectorOfSail* value * ApparentWind * 10000;
+
+
+
+            //Friction sector//////////////////////
+            if (Functions.DistBetwPoints(new Vector2f(0, 0), SpeedVect) < 1f / 10f * MaxSpeed)
                 Friction = -SpeedVect * (float)ObjectsBank.timeStep ; //static friction
             else
                 Friction = mass * -1 * SpeedVect / 100000f;// dynamic friction
-                                                             // mi* mass*G * 20 % *-velocity;
+                                                          
+
+            
+
+            SpeedVect = SpeedVect - SpeedVect * ObjectsBank.PunishtoSpeed;//colision fragment
+
 
 
             if (Functions.DistBetwPoints(new Vector2f(0, 0), SpeedVect + velocity) < MaxSpeed)
                 SpeedVect += velocity + Friction;
-            
 
-                //Console.WriteLine( "HHHHHHHHHHAAAAAAAAAAAAMMMMMUUUUULLLLLLLEEEEEEEEECCCCCCCCCCCCCCC");
-                //Console.Clear();
-                //Console.WriteLine("Vector of wind:" + Wind.VectorOfWind.ToString());
-                //Console.WriteLine("velocuty " + velocity.ToString());
-                //Console.WriteLine("speed vector of ship:" + SpeedVect.ToString());
-                //Console.WriteLine("dlugosc vektora predkosci:" + Functions.DistBetwPoints(new Vector2f(0, 0), SpeedVect));
-                //Console.WriteLine("wektor oporu"+ Friction);
-                //Console.WriteLine("czas:" + ObjectsBank.DeltaTime);
-                //Console.WriteLine(testmax);
-                //Console.WriteLine(i);
-                //i++;
+
+            
 
                 this.PositionOnMap += SpeedVect * (float)ObjectsBank.timeStep*2 ;// to jest potrzebne nie ruszać
 
-            
-            
         }
 
-
+        float AngleBetweenVectors(Vector2f Vect1,Vector2f Vect2)
+        {
+            float LVect1 = 1;
+            float LVect2 = 1;// their lenght is always = 1
+            float value = (Vect1.X * Vect2.X + Vect1.Y * Vect2.Y) / (LVect1 * LVect2);
+            return (float)Math.Acos(value ) * 180 / (float)Math.PI;// wynik to NaN, to nie dobrze :/
+        }
 
 
         public void Draw(RenderTarget window, RenderStates states)
         {
+           // Console.WriteLine("Stopien statku:"+ DegreeOfShip);
             window.Draw(shape);
           //  window.Draw(tmp);
         }
 
-
+        public void ShipIsTurning()
+        {
+            Turning = true;
+        }
 
 
     }
