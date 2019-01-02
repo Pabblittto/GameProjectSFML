@@ -124,7 +124,7 @@ namespace GameProject.Game
 
                 //ObjectsBank.PunishtoSpeed = Functions.CheckColision(CollisionRectangle, item);// so far works the best
 
-                tmp = Functions.CheckColision(CollisionRectangle, item);
+                tmp = Ship.CheckColision(CollisionRectangle, item);
                 if (max < tmp)                                                                  // to musi zostać poprawione
                 max = tmp;
             }

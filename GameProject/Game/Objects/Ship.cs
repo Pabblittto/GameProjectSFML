@@ -126,8 +126,18 @@ namespace GameProject.Game.Objects
                 }
         }
 
-
-
+        /// <summary>
+        /// the origin of the rectangles need to be set on left upper corner, as it is ad default
+        /// </summary>
+        public static float CheckColision(RectangleShape rect1, MyTile rect2)
+        {
+            // Vector2f CenterReact1 = rect1.Position + new Vector2f(rect1.Size.X / 2, rect1.Size.Y / 2);
+            // Vector2f CenterReact2 = rect2.Position + new Vector2f(rect2.Size.X / 2, rect2.Size.Y / 2);
+            if (rect1.GetGlobalBounds().Intersects(rect2.GetGlobalBounds()) == true) // this need to be simpliied
+                return rect2.SpeedPunish;
+            else
+                return 0;
+        }
 
         /// <summary>
         /// Ship will move only straight, where its prow facing

@@ -22,7 +22,7 @@ namespace GameProject.Elements
      
         public static int[,] GenerateMap(int size)// this function return static map until i made this function works perfect
         {
-            // need to make goog algotithm to creating maps 
+            // need to make good algotithm to creating maps 
             int[,] tmp = new int[,] { {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},// 0 means water, 1 means land this matrix will be loaded from file 
                                   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                                   {0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -91,8 +91,6 @@ namespace GameProject.Elements
 
 
 
-
-
         /// <summary>
         /// this function set position of card, if it is dropped on slot
         /// </summary>
@@ -148,20 +146,7 @@ namespace GameProject.Elements
             { return false; }
         }
 
-
-        /// <summary>
-        /// the origin of the rectangles need to be set on left upper corner, as it is ad default
-        /// </summary>
-        public static float CheckColision(RectangleShape rect1,MyTile rect2)
-        {
-            // Vector2f CenterReact1 = rect1.Position + new Vector2f(rect1.Size.X / 2, rect1.Size.Y / 2);
-            // Vector2f CenterReact2 = rect2.Position + new Vector2f(rect2.Size.X / 2, rect2.Size.Y / 2);
-            if (rect1.GetGlobalBounds().Intersects(rect2.GetGlobalBounds()) == true) // this need to be simpliied
-                return rect2.SpeedPunish;
-            else
-                return 0;
-        }
-
+    
         public static Vector2f RotateVector(Vector2f vector, float degrees)
         {
             Vector2f result = new Vector2f();
@@ -170,11 +155,6 @@ namespace GameProject.Elements
             result.X = vector.X * (float)Math.Cos(Ddegrees) - vector.Y * (float)Math.Sin(Ddegrees);
             result.Y = vector.X * (float)Math.Sin(Ddegrees) + vector.Y * (float)Math.Cos(Ddegrees);
             return result;
-        }
-
-        public static Vector2f CenterOfRectangle(RectangleShape shape)
-        {
-            return new Vector2f(shape.Size.X / 2, shape.Size.Y / 2);
         }
 
     }

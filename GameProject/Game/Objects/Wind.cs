@@ -62,10 +62,10 @@ namespace GameProject.Game.Objects
             shape.Position = _positionOnwindow;
             arrowInShape.Position = _positionOnwindow;
 
-            NL.Origin = Functions.CenterOfRectangle(NL);
-            SL.Origin = Functions.CenterOfRectangle(SL);
-            WL.Origin = Functions.CenterOfRectangle(WL);
-            EL.Origin = Functions.CenterOfRectangle(EL);
+            NL.Origin = CenterOfRectangle(NL);
+            SL.Origin = CenterOfRectangle(SL);
+            WL.Origin = CenterOfRectangle(WL);
+            EL.Origin = CenterOfRectangle(EL);
 
             vectorPointingN = new Vector2f(0, -60);
             PositionOnWindow = _positionOnwindow;
@@ -101,7 +101,10 @@ namespace GameProject.Game.Objects
             valueOfWind += a;
         }
 
-
+        Vector2f CenterOfRectangle(RectangleShape shape)
+        {
+            return new Vector2f(shape.Size.X / 2, shape.Size.Y / 2);
+        }
 
         public void Update(float degree)
         {
