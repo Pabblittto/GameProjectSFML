@@ -28,11 +28,13 @@ namespace GameProject
             window.RenderSomeElements = MenuObj.Render;
             window.SetFramerateLimit(120);
 
+            ObjectsBank.ParallelThread = new Thread(ObjectsBank.EndlessFuncForThreadWithoutTime);
+            ObjectsBank.ParallelThread.Start();
+
 
             while (window.IsOpen)
             {
                 
-
                 MyWindow.UpdateTickTAck();
 
 
@@ -40,9 +42,9 @@ namespace GameProject
                 window.DispatchEvents();
 
                 
-
                 window.RenderSomeElements.Invoke(window);
                 window.CheckSomeEents.Invoke(window);
+                ObjectsBank.CheckInfoWindowList();
 
                 ObjectsBank.CheckMouseLeftButton();
 

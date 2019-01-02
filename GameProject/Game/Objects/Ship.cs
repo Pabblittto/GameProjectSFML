@@ -130,7 +130,7 @@ namespace GameProject.Game.Objects
 
 
         /// <summary>
-        /// Ship will move only straight, where its beak facing
+        /// Ship will move only straight, where its prow facing
         /// </summary>
         public void Move(float value)
         {
@@ -152,19 +152,25 @@ namespace GameProject.Game.Objects
         /// </summary>
         public override void CalculatePos()// to nie działa dobrze, 
         {
+
             if(Keyboard.IsKeyPressed(Keyboard.Key.D)&&Turning==true)
             {
                 shape.TextureRect = RightSide;
+                Rotate(0.3f * speed / (float)MaxSpeed);
+
             }
             else if(Keyboard.IsKeyPressed(Keyboard.Key.A) && Turning == true)
             {
                 shape.TextureRect = LeftSide;
+                Rotate(-0.3f * speed / (float)MaxSpeed);
             }
             else
             {
                 Turning = false;
                 shape.Texture = NormalShip;
             }
+
+
 
             float SailAndWind;
             float AngleBetween = AngleBetweenVectors(this.VectorOfSail, Wind.VectorOfWind);
@@ -190,9 +196,9 @@ namespace GameProject.Game.Objects
 
             //Friction sector//////////////////////
             if (Functions.DistBetwPoints(new Vector2f(0, 0), SpeedVect) < 1f / 10f * MaxSpeed)
-                Friction = -SpeedVect * (float)ObjectsBank.timeStep ; //static friction
+                Friction = -SpeedVect * (float)ObjectsBank.timeStep/5 ; //static friction
             else
-                Friction = mass * -1 * SpeedVect / 100000f;// dynamic friction
+                Friction = mass * -1 * SpeedVect / 200000f;// dynamic friction
                                                           
 
             
@@ -204,8 +210,6 @@ namespace GameProject.Game.Objects
             if (Functions.DistBetwPoints(new Vector2f(0, 0), SpeedVect + velocity) < MaxSpeed)
                 SpeedVect += velocity + Friction;
 
-
-            
 
                 this.PositionOnMap += SpeedVect * (float)ObjectsBank.timeStep*2 ;// to jest potrzebne nie ruszać
 
@@ -222,9 +226,7 @@ namespace GameProject.Game.Objects
 
         public void Draw(RenderTarget window, RenderStates states)
         {
-           // Console.WriteLine("Stopien statku:"+ DegreeOfShip);
             window.Draw(shape);
-          //  window.Draw(tmp);
         }
 
         public void ShipIsTurning()

@@ -30,7 +30,13 @@ namespace GameProject.Elements
 
         public Player FutureUser; // pool for setting players for game
 
-
+        /// <summary>
+        /// If Button dont lead to another frame- Dest can be null
+        ///Modes: 1-leading to another frame
+        ///       2-mode for calling additional functions after click 
+        ///       3- mode for calling function with additional string
+        ///       To be honest mode 2 and 3 do nothing special (nothing...realy), mode 1 is neccessary 
+        /// </summary>
         public Button(Vector2f position, Vector2f size, Color Background, Color OnHover, Font UsedFont, string ToDisplay, uint CharacterSize,Frame Dest,int Mode_)
         {
             DestinationSet = Dest;

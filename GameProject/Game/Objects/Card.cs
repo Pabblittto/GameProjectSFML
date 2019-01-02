@@ -86,7 +86,7 @@ namespace GameProject.Game.Objects
 
         }
 
-        public void SetInfo()// function which need to be played in sonstructors of obiects
+        public void SetInfo()// function which need to be played in constructors of objects
         {
 
             for (int i = 0; i < InfoToDisplay.Count ; i+=2)
@@ -94,7 +94,7 @@ namespace GameProject.Game.Objects
                 Info.DisplayedString += InfoToDisplay[i] + ": " + InfoToDisplay[1+(i)]+"\n";
             }
 
-            if (AdditionInfo != "")// if additional info is added- add it XD
+            if (AdditionInfo != "")// if additional info is added- just add it XD
             {
                 Info.DisplayedString += AdditionInfo+"\n";
             }

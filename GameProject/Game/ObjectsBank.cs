@@ -14,6 +14,7 @@ namespace GameProject.Game
 {
      static class ObjectsBank// static class with only statisc elements, this contains all textures, fonts etc. Everything is loaded in constructor. Constructor is called once, before all game
     {
+        public static List<InfoWindow> ListOfInfoToShow = new List<InfoWindow>();// global list for easy access
 
 
         public static float PunishtoSpeed = 0;// variable which defines how speed of ship should be lower- if one will add other AI ships, this should be moved to ship class
@@ -39,9 +40,11 @@ namespace GameProject.Game
         public static bool MouseButtonWasPressed = false;// so, if sb is pressing left mouse button all the time and then they hover cursor on some item- the function "on pressed" will active
                                                          // this wariable prevent that.
 
-        public static Thread ColisionThread;
-        public static Thread MovingThread;// thread for moving ship
+        
+        public static Thread ParallelThread;// thread wchich works parallel with main one, it execude events wchich are independent from time 
+        public static Thread MovingThread;// thread for moving ship and other chronical events
         public static ThreadStart ListOfMethodToExegute;
+        public static ThreadStart ListOfMethodToRunWithoutTime;
 
 
         public static float ElapsedTime;// it is set in program class // everything based on time need to be connected with this variable
@@ -55,11 +58,22 @@ namespace GameProject.Game
 
                 while (ElapsedTime > timeStep)
                 {
+                    if(ListOfMethodToExegute!=null)
                     ObjectsBank.ListOfMethodToExegute();
                     ElapsedTime -= timeStep;
                 }
             }
         }
+
+        public static void EndlessFuncForThreadWithoutTime()// function called by second thread, if need add more function-add it to delegate  ListOfMethodToExecute 
+        {
+            while (true)
+            {
+                if(ListOfMethodToRunWithoutTime!=null)
+                    ObjectsBank.ListOfMethodToRunWithoutTime();
+            }
+        }
+
 
         public static void CheckMouseLeftButton()// if you want to know whaat is it, read comment near MouseButtonWasPressed variable
         {
@@ -69,15 +83,23 @@ namespace GameProject.Game
                 MouseButtonWasPressed = false;
         }
 
+       public static void CheckInfoWindowList()
+        {
+            if (ObjectsBank.ListOfInfoToShow.Count() != 0)
+            {
+                ObjectsBank.ClockPause = true;
+                ObjectsBank.ListOfInfoToShow[0].Render();
+            }
+        }
+
+
         /// <summary>
         /// loading all textures to bank
         /// </summary>
            static  public void LoadAll()
             {
-           
-
-
-                WindRose = new Texture("Res/Map/windrose.png");
+            
+            WindRose = new Texture("Res/Map/windrose.png");
                 WindArrow = new Texture("Res/Map/arrow.png");
                 land = new Texture("Res/Map/land.bmp");
                 water = new Texture("Res/Map/water.bmp");

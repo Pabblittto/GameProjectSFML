@@ -29,9 +29,9 @@ namespace GameProject
         public MyWindow(VideoMode mode,string title): base(mode,title)
         {
 
-            ObjectsBank.game = new GameObj();
             ObjectsBank.MyFont = new Font("./Res/Font.ttf");
             ObjectsBank.window = this;
+            ObjectsBank.game = new GameObj();
 
             this.Closed += Onclose;
             
@@ -41,8 +41,8 @@ namespace GameProject
         {
             MyWindow window = (MyWindow)sender;
 
-            if(ObjectsBank.ColisionThread!=null)
-            ObjectsBank.ColisionThread.Abort();
+            if(ObjectsBank.ParallelThread!= null)
+            ObjectsBank.ParallelThread.Abort();
 
             if (ObjectsBank.MovingThread != null)
                 ObjectsBank.MovingThread.Abort();
@@ -60,12 +60,16 @@ namespace GameProject
                 TickTAck++;
         }
 
-
-
-
         public void CloseThis()
         {
+            if (ObjectsBank.ParallelThread != null)
+                ObjectsBank.ParallelThread.Abort();
+
+            if (ObjectsBank.MovingThread != null)
+                ObjectsBank.MovingThread.Abort();
+
             this.Close();
+            
         }
 
 
