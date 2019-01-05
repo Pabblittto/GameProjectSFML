@@ -157,5 +157,50 @@ namespace GameProject.Elements
             return result;
         }
 
+
+                 //function for dividing long text sended to info window. It divide text into string rows ("\n")
+        public static String Dividing(String text, uint sizeOfCharacter, Vector2f WindowSize, float Padding)
+        {
+            String[] List = text.Split(' ');
+            List<String> Rows = new List<String>();
+            Text tmp = new Text("", ObjectsBank.MyFont, sizeOfCharacter);
+            float MaxWidth = WindowSize.X - 2 * Padding;
+            float MaxHeight = WindowSize.Y - Padding * 2;// 40 pixels is reserved for button below
+
+            String row;
+            String moved;
+            String[] realyTmp;
+
+            float test;
+
+            foreach (String word in List)
+            {
+                tmp.DisplayedString += " " + word;
+                test = tmp.GetLocalBounds().Width;
+                if (test > MaxWidth)// if string is too long for one row
+                {
+                    realyTmp = tmp.DisplayedString.Split(' ');
+                    moved = realyTmp[realyTmp.Length - 1];// take last string 
+
+                    row = tmp.DisplayedString.Replace(moved, "\n");
+                    Rows.Add((string)row.Clone());
+                    tmp.DisplayedString = moved;// string which can't go to upper row goes to lower row
+                }
+            }
+            Rows.Add((String)tmp.DisplayedString.Clone());
+            float height = tmp.GetLocalBounds().Height;
+            height *= Rows.Count();// multiplied by numbers of rows
+
+            if (height > MaxHeight)
+                throw new Exception(); // so now lest check if there is enought place for rows
+
+            row = "";//clearing row
+            foreach (string item in Rows)
+            {
+                row += item + " ";// creating result
+            }
+
+            return row;
+        }
     }
 }
