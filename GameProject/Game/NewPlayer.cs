@@ -40,10 +40,12 @@ namespace GameProject.Game
             back.AddingAdditionalFunction(FocusChanged);
             ok.AddingAdditionalFunction(FocusChanged);
             ok.AddingAdditionalFunction(CreatePlayer);
-            
 
-            Background = new Sprite(Menu.BackSite);
-            Background.Color = new Color(255, 255, 255, 128);// semi transparent
+
+            Background = new Sprite(Menu.BackSite)
+            {
+                Color = new Color(255, 255, 255, 128)// semi transparent
+            };
         }
 
 

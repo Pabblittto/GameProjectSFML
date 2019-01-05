@@ -27,20 +27,22 @@ namespace GameProject.Game
         RectangleShape CollisionRectangle;//this one represents ship rectangle
         Wind WindRose;
 
-
+      
 
         public GameObj()
         {
-            UserLeftSite = new SFML.Graphics.View(new FloatRect(0, 0, 800, 900))
+            UserLeftSite = new SFML.Graphics.View(new FloatRect(0, 0, 800, 900))// size of user interface part
             {
                 Viewport = new FloatRect(0, 0, 8 / 18f, 1f)
             };
 
-            MapRightSite = new SFML.Graphics.View(new FloatRect(0, 0, 1000, 900))
+            MapRightSite = new SFML.Graphics.View(new FloatRect(0, 0, 1000, 900))// size of map part
             {
                 Viewport = new FloatRect(8 / 18f, 0, 10 / 18f, 1f)
             };
 
+
+            
 
         }
 
@@ -142,6 +144,8 @@ namespace GameProject.Game
             //}
             //}
         }
+
+
 
 
         public override void CheckEvents(MyWindow window)// prawdopodobnie to jest nie potrzebne

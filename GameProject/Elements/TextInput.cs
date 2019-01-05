@@ -18,6 +18,7 @@ namespace GameProject.Elements
 
 
 
+
         public TextInput(Vector2f boxSize,Vector2f Position, Color textColor)
         {
             ObjectsBank.window.TextEntered += TextEntering;

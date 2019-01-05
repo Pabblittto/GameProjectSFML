@@ -18,11 +18,14 @@ namespace GameProject
         public static float clockmeasure;//
         static void Main(string[] args)
         {
+            MyWindow window = new MyWindow(new VideoMode(1800, 900), "GAME");
+              MenuObj = new Menu(window);      
 
             ObjectsBank.LoadAll();// load all textures
 
-            MyWindow window = new MyWindow(new VideoMode(1800, 900), "GAME");
-              MenuObj = new Menu(window);
+            window.MouseLeft += Functions.LostFocus;
+            window.MouseEntered += Functions.RetriveFocus;
+
 
             window.CheckSomeEents = MenuObj.CheckEvents;
             window.RenderSomeElements = MenuObj.Render;

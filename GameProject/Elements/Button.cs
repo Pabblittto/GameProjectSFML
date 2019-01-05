@@ -115,6 +115,11 @@ namespace GameProject.Elements
             {
                 ObjectsBank.window.RenderSomeElements = DestinationSet.Render;
                 ObjectsBank.window.CheckSomeEents = DestinationSet.CheckEvents;
+
+                //ObjectsBank.window.KeyPressed=DestinationSet.
+
+
+
             }
             else
                 throw new Exception();// this shoul never happend

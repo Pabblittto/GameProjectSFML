@@ -43,9 +43,11 @@ namespace GameProject.Game.Objects
         {
             AdditionInfo = _AdditionalInfo;
             Info.Color = Color.Black;
-            InfoShape = new RectangleShape();
-            InfoShape.FillColor = Color.White;
-            
+            InfoShape = new RectangleShape
+            {
+                FillColor = Color.White
+            };
+
             TimeOfHover = new Time();
 
             Image = new Texture(Path);
