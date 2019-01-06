@@ -36,8 +36,9 @@ namespace GameProject.Elements
         ///       2-mode for calling additional functions after click 
         ///       3- mode for calling function with additional string
         ///       To be honest mode 2 and 3 do nothing special (nothing...realy), mode 1 is neccessary 
+        ///       IF CURRENT FRAME IS NULL IT MEANS THAT THIS BUTTON IS CONNECTED TO SOME KIND OF TEMPORARY WINDOW/OBJECT
         /// </summary>
-        public Button(Vector2f position, Vector2f size, Color Background, Color OnHover, Font UsedFont, string ToDisplay, uint CharacterSize,Frame Dest,int Mode_)
+        public Button(Vector2f position, Vector2f size, Color Background, Color OnHover, Font UsedFont, string ToDisplay, uint CharacterSize,Frame Dest,int Mode_,Frame Current)
         {
             DestinationSet = Dest;
             OnHoverColor = OnHover;
