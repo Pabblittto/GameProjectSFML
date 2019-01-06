@@ -7,6 +7,7 @@ using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
 using GameProject.Elements;
+using GameProject.Game;
 
 namespace GameProject.Elements
 {
@@ -24,6 +25,11 @@ namespace GameProject.Elements
 
             String tmp = Functions.Dividing(info, 25, shape.Size, 10);
 
+            ContainedInfo = new Text(tmp, ObjectsBank.MyFont, 30)
+            {
+                Color = Color.Black,
+            };
+            ContainedInfo.Origin = new Vector2f(ContainedInfo.GetLocalBounds().Width / 2, ContainedInfo.GetLocalBounds().Height / 2);
 
         }
 
