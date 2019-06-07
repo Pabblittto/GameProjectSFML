@@ -44,9 +44,10 @@ namespace GameProject.Game.Objects
         {
             CardInSlot = card;
 
-            if (card != null)
+            if (card != null )
             {
                 card.SetItemPosition(this.CardPos);
+                if(card.Slot != this)
                 card.SetCardSlot(this);
             }
         }

@@ -16,7 +16,7 @@ namespace GameProject
     {
 
         public static int TickTAck = 1;// intresting variable.  If some event need unstopable mouse focus on it(for some period), its method check if TickTack 
-                                       // have next values, ich there is lack of continuity it means that user moved mouse from item, and Time of focus 
+                                       // have next values, if there is lack of continuity it means that user moved mouse from item, and Time of focus 
                                        // need to be calculated again, THIS IS USED FOR ITEMS AND ITS DELAYED SHOWING INFO
 
          

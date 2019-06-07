@@ -36,7 +36,7 @@ namespace GameProject.Elements
 
         }
 
-        private void TextEntering(object sender, TextEventArgs e)
+        public void TextEntering(object sender, TextEventArgs e)
         { 
             if (NewPlayer.Focus == true  )
             {

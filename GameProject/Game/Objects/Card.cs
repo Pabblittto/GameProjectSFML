@@ -59,6 +59,7 @@ namespace GameProject.Game.Objects
             window.Draw(shape);
             OnHover();
             Drag();
+            DrawInfoBox();
         }
 
         public void SetItemPosition(Vector2f position)
@@ -137,7 +138,6 @@ namespace GameProject.Game.Objects
         private void Drag()
         {
             
-            
                 if ((hovered == true && Mouse.IsButtonPressed(Mouse.Button.Left) && ObjectsBank.MouseIsDragging==false) || Dragging == true)
                 {
                     ObjectsBank.MouseIsDragging = true;
@@ -160,6 +160,7 @@ namespace GameProject.Game.Objects
         public void SetCardSlot(Slot slot)
         {
             Slot = slot;
+            slot.SetCardIn(this);
         }
 
     }

@@ -7,7 +7,7 @@ using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
 
-namespace GameProject.Game.Objects
+namespace GameProject.Game.Objects.Items
 {
     class Sailor:Card // class for making possible members of player's crew
     {

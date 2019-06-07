@@ -26,11 +26,13 @@ namespace GameProject.Game
             
             NameInput = new TextInput(new Vector2f(450, 50), new Vector2f(665, 70), Color.Black);
 
+
             Info = new Text("Whats youry name Capitan?", ObjectsBank.MyFont, 40)
             {
                 Position = new Vector2f(625, 10),
                 Color = Color.Black
             };
+            
 
             ok = new Button(new Vector2f(925, 130), new Vector2f(250, 50), new Color(0, 250, 255), new Color(0, 152, 155), ObjectsBank.MyFont, "Adventure!", 30, ObjectsBank.game,1);
             back = new Button(new Vector2f(625, 130), new Vector2f(250, 50), new Color(0, 250, 255), new Color(0, 152, 155), ObjectsBank.MyFont, "Back", 30, menu,1);
@@ -46,8 +48,10 @@ namespace GameProject.Game
             Background.Color = new Color(255, 255, 255, 128);// semi transparent
         }
 
-
-
+        private void Window_TextEntered(object sender, TextEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
 
         public override void Render(MyWindow window)
         {

@@ -84,7 +84,7 @@ namespace GameProject.Elements
                                   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                                   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                                   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0} };
+                                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
             return tmp;
                 
         }
@@ -96,31 +96,40 @@ namespace GameProject.Elements
         /// </summary>
         public static void DropOnSlot<Type>(Card card, CardSlot<Type> cardSlot) where Type: Card
         {
-            if (card!=null && cardSlot.avavailable==true && card.GetType()==typeof(Type) && !Mouse.IsButtonPressed(Mouse.Button.Left)) {
-                Vector2f SlotCenter = cardSlot.shape.Position + new Vector2f(36, 36);
-                Vector2f CardCenter = card.shape.Position + new Vector2f(35, 35);
+            if (card!=null && card.GetType()==typeof(Type) && !Mouse.IsButtonPressed(Mouse.Button.Left)) {
 
-                
-                if (DistBetwPoints(SlotCenter, CardCenter) < ObjectsBank.MaxDistanceSlot_Card )
+                if (cardSlot.avavailable == true)
                 {
+                    Vector2f SlotCenter = cardSlot.shape.Position + new Vector2f(36, 36);
+                    Vector2f CardCenter = card.shape.Position + new Vector2f(35, 35);
 
 
-                    if (cardSlot.CardInSlot != null)// if there is some card in this slot- chanege places
+                    if (DistBetwPoints(SlotCenter, CardCenter) < ObjectsBank.MaxDistanceSlot_Card)
                     {
-                        Card tmpCard = cardSlot.CardInSlot;
-                        Slot slot = card.Slot;
 
-                        slot.SetCardIn(tmpCard);
-                        tmpCard.SetCardSlot(slot);
-                    }
-                    else
-                    {
-                        if (card.Slot != null) // very unpossible situation, all cards will be in one slot
-                        card.Slot.SetCardIn(null);
-                    }
 
-                    cardSlot.SetCardIn(card);
-                    card.SetCardSlot(cardSlot);// ZDECYDOWANIE POTRZEBA takieej funkcji !!!! trzeba pomyśleć
+                        if (cardSlot.CardInSlot != null)// if there is some card in this slot- chanege places
+                        {
+                            Card tmpCard = cardSlot.CardInSlot;
+                            Slot slot = card.Slot;
+
+                            slot.SetCardIn(tmpCard);
+                            tmpCard.SetCardSlot(slot);
+                        }
+                        else
+                        {
+                            if (card.Slot != null) // very unpossible situation, all cards will be in one slot
+                                card.Slot.SetCardIn(null);
+                        }
+
+                        cardSlot.SetCardIn(card);
+                        card.SetCardSlot(cardSlot);// ZDECYDOWANIE POTRZEBA takieej funkcji !!!! trzeba pomyśleć
+                    }
+                }
+                else
+                {
+                    GameObj.ListOfPopingUpInfo.Add(new PopUpInfo("You can not do that", ObjectsBank.GameFrame));
+
                 }
             }
         }

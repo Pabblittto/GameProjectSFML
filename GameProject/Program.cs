@@ -19,10 +19,10 @@ namespace GameProject
         static void Main(string[] args)
         {
 
-            ObjectsBank.LoadAll();// load all textures
-
             MyWindow window = new MyWindow(new VideoMode(1800, 900), "GAME");
               MenuObj = new Menu(window);
+
+            ObjectsBank.LoadAll();// load all textures
 
             window.CheckSomeEents = MenuObj.CheckEvents;
             window.RenderSomeElements = MenuObj.Render;
@@ -31,6 +31,8 @@ namespace GameProject
             ObjectsBank.ParallelThread = new Thread(ObjectsBank.EndlessFuncForThreadWithoutTime);
             ObjectsBank.ParallelThread.Start();
 
+            ObjectsBank.MovingThread = new Thread(ObjectsBank.EndlassFuncForThreat);
+            ObjectsBank.MovingThread.Start();
 
             while (window.IsOpen)
             {

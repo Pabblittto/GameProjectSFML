@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using SFML.System;
 using GameProject.Elements;
 
-namespace GameProject.Game.Objects
+namespace GameProject.Game.Objects.Items
 {
       class Cargo: Card 
     {

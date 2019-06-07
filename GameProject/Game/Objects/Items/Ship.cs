@@ -10,7 +10,7 @@ using GameProject.Elements;
 
 
 
-namespace GameProject.Game.Objects
+namespace GameProject.Game.Objects.Items
 {
     [Serializable]
     class Ship : Physics, Drawable // obiect of ship, hsve all properties, 

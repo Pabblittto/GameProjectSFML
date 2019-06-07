@@ -8,6 +8,7 @@ using SFML.Window;
 using SFML.Graphics;
 using SFML.Audio;
 using GameProject.Elements;
+using GameProject.Game.Objects.Items;
 using GameProject.Game.Objects;
 using GameProject.Game.UsrInt;
 
@@ -15,8 +16,8 @@ namespace GameProject.Game
 {
     class GameObj: Frame// game is combined with many elements
     {
-        SFML.Graphics.View UserLeftSite;
-        SFML.Graphics.View MapRightSite;
+        public SFML.Graphics.View UserLeftSite;
+        public SFML.Graphics.View MapRightSite;
         static public Ship BeginnerShip = new Ship(new Vector2f(65, 100), 5, 10, 5, "Res/Ships/Ship2.png","Res/Ships/Side.png",new Vector2f(20,20),0,100,120,2);
 
 
@@ -27,10 +28,11 @@ namespace GameProject.Game
         RectangleShape CollisionRectangle;//this one represents ship rectangle
         Wind WindRose;
 
-
+       static public List<PopUpInfo> ListOfPopingUpInfo = new List<PopUpInfo>();// if 
 
         public GameObj()
         {
+            ObjectsBank.GameFrame = this;
             UserLeftSite = new SFML.Graphics.View(new FloatRect(0, 0, 800, 900))
             {
                 Viewport = new FloatRect(0, 0, 8 / 18f, 1f)
@@ -40,6 +42,11 @@ namespace GameProject.Game
             {
                 Viewport = new FloatRect(8 / 18f, 0, 10 / 18f, 1f)
             };
+
+            ListOfPopingUpInfo.Add(new PopUpInfo("Siema siema, o tej porze kazdy wypic morze", this));
+            ListOfPopingUpInfo.Add(new PopUpInfo("A to kolejne info w kolejce", this));
+            ListOfPopingUpInfo.Add(new PopUpInfo("A te jeszcze jedno", this));
+
 
 
         }
@@ -66,8 +73,7 @@ namespace GameProject.Game
             ObjectsBank.ListOfMethodToExegute += User.UserShip.CalculatePos;
             ObjectsBank.ListOfMethodToExegute += CheckColision;
 
-            ObjectsBank.MovingThread = new System.Threading.Thread( ObjectsBank.EndlassFuncForThreat);
-            ObjectsBank.MovingThread.Start();
+
 
         }
 
@@ -97,13 +103,21 @@ namespace GameProject.Game
             {
                 User.UserShip.UpdateView(MapRightSite);
                 window.Draw(User.UserShip);
-                window.Draw(CollisionRectangle); // pink rectangle shape for colision
+                window.Draw(CollisionRectangle); // pink rectangle shape for colision need to hide this after testing
             }
             window.SetView(window.DefaultView);
             window.Draw(settings);
 
             WindRose.Update(-1*MapRightSite.Rotation);
             window.Draw(WindRose);
+
+            if (ListOfPopingUpInfo.Count != 0)
+            {
+                if (ListOfPopingUpInfo[0].SendToThread == false)
+                    ListOfPopingUpInfo[0].StartDisplaying();// send methot to thread
+                
+                window.Draw(ListOfPopingUpInfo[0]);
+            }
 
         }
 
@@ -128,7 +142,7 @@ namespace GameProject.Game
                 if (max < tmp)                                                                  // to musi zostać poprawione
                 max = tmp;
             }
-            Console.WriteLine( max.ToString() );
+           // Console.WriteLine( max.ToString() );
             //if (ListOfActualPunish.Count != 0)
             //{
             //    max = ListOfActualPunish[0];
@@ -142,6 +156,8 @@ namespace GameProject.Game
             //}
             //}
         }
+
+
 
 
         public override void CheckEvents(MyWindow window)// prawdopodobnie to jest nie potrzebne

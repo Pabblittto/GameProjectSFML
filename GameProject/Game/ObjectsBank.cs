@@ -16,6 +16,7 @@ namespace GameProject.Game
     {
         public static List<InfoWindow> ListOfInfoToShow = new List<InfoWindow>();// global list for easy access
 
+        public static GameObj GameFrame;
 
         public static float PunishtoSpeed = 0;// variable which defines how speed of ship should be lower- if one will add other AI ships, this should be moved to ship class
 
@@ -44,12 +45,14 @@ namespace GameProject.Game
         public static Thread ParallelThread;// thread wchich works parallel with main one, it execude events wchich are independent from time 
         public static Thread MovingThread;// thread for moving ship and other chronical events
         public static ThreadStart ListOfMethodToExegute;
-        public static ThreadStart ListOfMethodToRunWithoutTime;
+        public static ThreadStart listOfMethodToRunWithoutTime;
 
 
         public static float ElapsedTime;// it is set in program class // everything based on time need to be connected with this variable
         public static float timeStep = 0.0083f;// time step set by my self, 0.0083 s. it is about 120fps (i hope it works like that)
         public static bool ClockPause = false;// it defines if the clock is paused- all time based action will be stopped
+
+        public static ThreadStart ListOfMethodToRunWithoutTime { get => listOfMethodToRunWithoutTime; set => listOfMethodToRunWithoutTime = value; }
 
         public static void EndlassFuncForThreat()// function called by second thread, if need add more function-add it to delegate  ListOfMethodToExecute 
         {
@@ -92,11 +95,21 @@ namespace GameProject.Game
             }
         }
 
+        private static void GainFocus(object sender, EventArgs e)
+        {
+            ClockPause = false;
+        }
+
+        private static void LostFocus(object sender, EventArgs e)
+        {
+            ClockPause = true;
+        }
+
 
         /// <summary>
         /// loading all textures to bank
         /// </summary>
-           static  public void LoadAll()
+        static  public void LoadAll()
             {
             
             WindRose = new Texture("Res/Map/windrose.png");
@@ -107,8 +120,13 @@ namespace GameProject.Game
                 shallow = new Texture("Res/Map/shallow.bmp");
                 LettersToCompas = new Texture("Res/Map/letters.png");
 
-
+            window.LostFocus += LostFocus;
+            window.GainedFocus += GainFocus;
 
             }
+
+
+
+
     }
 }

@@ -8,7 +8,7 @@ using SFML.System;
 
 
 
-namespace GameProject.Game.Objects
+namespace GameProject.Game.Objects.Items
 {
     class Cannon: Card
     {

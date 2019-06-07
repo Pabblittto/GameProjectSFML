@@ -4,3 +4,5 @@ Dlaczego wektory siê ze sob¹ nie pokrywaja i obrazki
 poniewa¿ uk³ad wspo³¿êdnych jest przekrêcony oraz obrazki statków s¹ pionowo, wiêc nale¿y modyfikowaæ textury , a vektory zostawiæ w spokoju 
 
 Blokada na nadawanie imienia, nie mo¿na dawaæ znakow specialnych
+
+Licznik wiadomoœci dla pop upów

@@ -79,7 +79,6 @@ namespace GameProject.Elements
                 default:
                     {
                         throw new Exception();// jakiś nieobsługiwany mode
-                        break;
                     }
             }
 
@@ -154,6 +153,7 @@ namespace GameProject.Elements
         {
             Content.Position = new Vector2f(Content.Position.X + xToRight, Content.Position.Y+ yToDown);
         }
+
 
 
         /// <summary>

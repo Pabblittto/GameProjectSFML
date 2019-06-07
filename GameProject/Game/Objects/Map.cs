@@ -170,6 +170,7 @@ namespace GameProject.Game.Objects
         public void TilesOnWindow(SFML.Graphics.View view)// this function specifiin which tiles should be drawn on descop
         {
             TilesOnScreen = new ConcurrentBag<RectangleShape>();// clearing bag
+            
             int squareside = 700;
 
              UpRow = (int)((view.Center.Y - squareside) / 80);
