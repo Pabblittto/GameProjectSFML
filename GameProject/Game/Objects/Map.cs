@@ -31,7 +31,9 @@ namespace GameProject.Game.Objects
         Texture error;
 
 
-        public ConcurrentBag<RectangleShape> TilesOnScreen = new ConcurrentBag<RectangleShape>();
+        //public ConcurrentBag<RectangleShape> TilesOnScreen = new ConcurrentBag<RectangleShape>();
+        public List<RectangleShape> TilesOnScreen = new List<RectangleShape>();
+
         public ConcurrentBag<RectangleShape> TilesToColision = new ConcurrentBag<RectangleShape>();
 
         int UpRow;
@@ -112,10 +114,12 @@ namespace GameProject.Game.Objects
 
          void RenderMap(int nr_columns, int nr_rows)
         {
-
-            foreach (RectangleShape item in TilesOnScreen)
+            lock (TilesOnScreen)
             {
-                ObjectsBank.window.Draw(item);
+                foreach (RectangleShape item in TilesOnScreen)
+                {
+                    ObjectsBank.window.Draw(item);
+                }
             }
         }
 
@@ -169,7 +173,7 @@ namespace GameProject.Game.Objects
 
         public void TilesOnWindow(SFML.Graphics.View view)// this function specifiin which tiles should be drawn on descop
         {
-            TilesOnScreen = new ConcurrentBag<RectangleShape>();// clearing bag
+            TilesOnScreen.Clear();
             
             int squareside = 700;
 
@@ -184,14 +188,17 @@ namespace GameProject.Game.Objects
 
             if (LeftColumn < 0) { LeftColumn = 0; };
             if(RightColumn> nr_columns-1) { RightColumn = nr_columns - 1; };
-            
 
-            for (int i =UpRow ; i <= DownRow; i++)
+            lock (TilesOnScreen)
             {
-                for (int j = LeftColumn; j <= RightColumn; j++)
+                for (int i = UpRow; i <= DownRow; i++)
                 {
-                    TilesOnScreen.Add(MapStructure[i, j]);
+                    for (int j = LeftColumn; j <= RightColumn; j++)
+                    {
 
+                        TilesOnScreen.Add(MapStructure[i, j]);
+
+                    }
                 }
             }
         }

@@ -54,27 +54,30 @@ namespace GameProject.Game
 
         public static ThreadStart ListOfMethodToRunWithoutTime { get => listOfMethodToRunWithoutTime; set => listOfMethodToRunWithoutTime = value; }
 
+        public static EventWaitHandle PauseHandle = new EventWaitHandle(true,EventResetMode.ManualReset);
+
         public static void EndlassFuncForThreat()// function called by second thread, if need add more function-add it to delegate  ListOfMethodToExecute 
         {
             while(true)
             {
-
-                while (ElapsedTime > timeStep)
-                {
+                Thread.Sleep(TimeSpan.FromSeconds(timeStep));// tu jest droga do zapierdalania- trzeba nad tym pomyslec
+                //PauseHandle // z funkcja pouzy trzeba ogarnąć i będzie git bardzo !!!
+                //while (ElapsedTime > timeStep)
+                //{
                     if(ListOfMethodToExegute!=null)
                     ObjectsBank.ListOfMethodToExegute();
                     ElapsedTime -= timeStep;
-                }
+                //}
             }
         }
 
         public static void EndlessFuncForThreadWithoutTime()// function called by second thread, if need add more function-add it to delegate  ListOfMethodToExecute 
         {
-            while (true)
-            {
-                if(ListOfMethodToRunWithoutTime!=null)
-                    ObjectsBank.ListOfMethodToRunWithoutTime();
-            }
+            //while (true)
+            //{
+            //    if(ListOfMethodToRunWithoutTime!=null)
+            //        ObjectsBank.ListOfMethodToRunWithoutTime();
+            //}
         }
 
 
